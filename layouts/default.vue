@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <Header />
+  <div id="home page" class="tvn page">
     <slot />
-    <Footer />
   </div>
 </template>

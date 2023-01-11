@@ -1,7 +1,6 @@
-import axios from 'axios'
 import { ActionContext } from 'vuex'
-import { makeIpInfoRequest, makeRequest } from '~~/utils/makeRequest'
 import { SearchMetaType } from '../types/search'
+import { makeIpInfoRequest, makeRequest } from '~~/utils/makeRequest'
 
 type Context = ActionContext<any, any>
 const state = () => ({
@@ -16,8 +15,8 @@ const mutations = {
   },
   SORT_RESULTS_BY(state, order) {
     state.results.sort(function (a, b) {
-      var dateA = Date.parse(a.created_at)
-      var dateB = Date.parse(b.created_at)
+      const dateA = Date.parse(a.created_at)
+      const dateB = Date.parse(b.created_at)
 
       if (order === 'oldest' && dateA < dateB) {
         return -1
@@ -67,14 +66,16 @@ const actions = {
     }
   },
   async fetch_results(context: Context, query) {
-    await axios
-      .get(`${process.env.BASE_URL}search?query=${query}`)
-      .then((response) => {
-        context.commit('SAVE_SEARCH_RESULTS', response.data.response)
+    try {
+      const response = await makeRequest('search', {
+        params: {
+          query,
+        },
       })
-      .catch((error) => {
-        console.log('search error', error)
-      })
+      context.commit('SAVE_SEARCH_RESULTS', response.data.response)
+    } catch (error) {
+      console.error('search error', error.response.data)
+    }
   },
   empty_results_object(context) {
     context.commit('EMPTY_RESULTS_OBJECT')

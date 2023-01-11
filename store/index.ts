@@ -11,6 +11,7 @@ import {
   searchStore,
   userStore,
 } from './modules'
+
 import { makeRequest } from '~~/utils/makeRequest'
 
 export interface State {
@@ -89,9 +90,12 @@ export const store = createStore({
     load_skeleton(context) {
       context.commit('SET_LOADING_STATE', true)
     },
-    set_active_user(context, req) {
+    set_active_user(context, payload) {
       const router = useRouter()
-      context.commit('SET_ACTIVE_USER', req)
+      context.commit('SET_ACTIVE_USER', {
+        accessToken: payload.code,
+        userName: payload.username,
+      })
       router.replace({ path: '/' })
     },
     logout(context) {
@@ -124,9 +128,9 @@ export const store = createStore({
     SET_LOADING_STATE(_, status) {
       this.state.resource_isLoading = status
     },
-    SET_ACTIVE_USER(_, req) {
-      this.state.access_token = req.code
-      this.state.username = req.username
+    SET_ACTIVE_USER(_, { accessToken, userName }) {
+      this.state.access_token = accessToken
+      this.state.username = userName
     },
     LOGOUT(_) {
       this.state.access_token = null
