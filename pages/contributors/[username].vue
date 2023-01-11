@@ -1,0 +1,130 @@
+<template>
+  <div class="ui container">
+    <Navigation />
+    <div v-if="isLoading">
+      <SkeletonRecipeCard />
+    </div>
+    <div v-else>
+      <br /><br /><br />
+      <Breadcrumb :active="dashboard" />
+      <div class="thirteen wide computer column sixteen wide mobile column">
+        <div class="ui grid">
+          <div class="six wide computer column sixteen wide mobile column">
+            <img class="ui fluid image" :src="contributor.avatar" />
+          </div>
+          <div class="ten wide computer column sixteen wide mobile column">
+            <div>
+              <h2>About this contributor</h2>
+            </div>
+            <div style="margin-top: 3%"></div>
+            <div class="tvn horizontal stroke"></div>
+            <div style="margin-top: 3%"></div>
+            <div style="margin-top: 15px">
+              <b>{{ contributor.name }}</b> ({{ contributor.pronouns }})
+            </div>
+            <small
+              ><em> Member since: {{ contributor.created_at }} </em></small
+            >
+            <div>
+              <small>
+                <a :href="'#/search?q=:cookbooks|author ' + contributor.name">
+                  Browse my cookbooks {{ contributor.contributions.cookbooks }}
+                </a>
+              </small>
+              <br />
+              <small>
+                <a :href="'#/search?q=:recipes|author ' + contributor.name">
+                  Browse my recipes {{ contributor.contributions.recipes }}
+                </a>
+              </small>
+            </div>
+            <br />
+            <div class="ui tbb tiny button">
+              <i class="ui cart icon"></i> Shop my pantry
+            </div>
+            <div style="margin-top: 3%"></div>
+            <div>{{ contributor.about }}</div>
+            <div style="margin-top: 8%; margin-bottom: 8%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sixteen wide computer column sixteen wide mobile column">
+        <div class="ui grid">
+          <div class="sixteen wide column">
+            <div class="ui form">
+              <div class="field">
+                <label>*Send a message/Give Feedback/Ask me a question:</label>
+                <textarea :placeholder="personalizedMsg()"></textarea>
+              </div>
+              <div class="field">
+                <label>*Your name:</label>
+                <input type="text" />
+              </div>
+              <div class="field">
+                <label>*Your phone:</label>
+                <input type="text" />
+              </div>
+              <div class="field">
+                <label>*We sent you a verification code</label>
+                <input type="text" style="width: 35%" />
+              </div>
+            </div>
+            <br />
+            <div class="ui small disabled button tbb">Submit</div>
+          </div>
+        </div>
+      </div>
+      <ContactForm />
+      <BottomNav />
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+export default defineNuxtComponent({
+  mounted() {
+    this.$store.dispatch('fetch_contributor', this.$route.params.username)
+  },
+  computed: {
+    contributor() {
+      return this.$store.state.contributor
+    },
+    isLoading() {
+      return this.$store.state.resource_isLoading
+    },
+  },
+  data() {
+    return {
+      dashboard: 'My Dashboard',
+    }
+  },
+  methods: {
+    getMapAddr: function ($q) {
+      return ' http://maps.google.com/?q=' + $q
+    },
+    personalizedMsg() {
+      return (
+        'This ia a personalised message/question, it goes directly into ' +
+        this.contributor.name +
+        "'s" +
+        ' email, so, make it count!'
+      )
+    },
+  },
+})
+</script>
+
+<style scoped>
+.container {
+  margin-top: 23vh;
+}
+
+.contact-labels span {
+  padding: 8px;
+  font-weight: 500 !important;
+}
+
+.contact-labels span a {
+  color: #171717 !important;
+}
+</style>
