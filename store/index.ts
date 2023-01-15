@@ -71,12 +71,13 @@ export const store = createStore({
         context.commit('STORE_POLICIES', policiesData.response)
       } catch (error) {
         if (
+          error.response &&
           error.response.status === this.state.response.statuses.unauthorized
         ) {
           context.commit('SET_LOADING_STATE', true)
           console.log('malformed request, check headers')
         } else {
-          console.log('must be a server error')
+          console.error('must be a server error', error)
         }
         context.commit('SET_LOADING_STATE', false)
       }
