@@ -93,12 +93,7 @@
       </div>
       <div class="item">
         <div class="content">
-          <NuxtLink
-            :to="{
-              path: '/dashboard',
-              query: { tab: 'Privacy Settings' },
-            }"
-          >
+          <NuxtLink :to="`/dashboard?tab=Privacy Settings`">
             <div>
               <small> <i class="ui lock icon"></i> Privacy Settings </small>
             </div>

@@ -163,11 +163,7 @@
                 <NuxtLink :to="`/cookbooks/${cookbook.slug}`">
                   edit |
                 </NuxtLink>
-                <NuxtLink
-                  :to="{ path: '/dashboard', query: { tab: 'Drafts' } }"
-                >
-                  add recipe
-                </NuxtLink>
+                <NuxtLink :to="`/dashboard/?tab=Drafts`"> add recipe </NuxtLink>
               </span>
               <div class="meta">
                 <span>

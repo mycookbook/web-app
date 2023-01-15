@@ -8,7 +8,7 @@
         <a href="/#/usage-policy">Usage Policy,</a> and our
         <a href="/#/terms-and-conditions">Terms &amp; Conditions</a>
       </span>
-      <span id="cookie-dismiss">
+      <span id="cookie-dismiss" @click="dismissCookiePolicy()">
         <i class="close icon"></i>
       </span>
     </div>
@@ -19,6 +19,12 @@
 export default defineNuxtComponent({
   data() {
     return {}
+  },
+  methods: {
+    dismissCookiePolicy() {
+      document.cookie = 'read-cookie-policy=true'
+      $('.cookie.nag').hide()
+    },
   },
 })
 </script>

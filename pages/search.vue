@@ -82,14 +82,7 @@
               >Neat right? Learn how to search like a pro using our homegrown</b
             ></em
           >
-          <NuxtLink
-            :to="{
-              path: '/help',
-              query: { doc: 'query-syntax' },
-            }"
-          >
-            query syntax
-          </NuxtLink>
+          <NuxtLink :to="`/help?doc=query-syntax`"> query syntax </NuxtLink>
         </div>
         <div class="margin-top-20"></div>
         <div class="ui grid">

@@ -27,17 +27,47 @@ export default defineNuxtConfig({
       serverOauthEndpoint: process.env.SERVER_ENDPOINT_OAUTH,
     },
   },
-  head: {
-    script: [
-      {
-        src: 'https://code.jquery.com/jquery-3.3.1.min.js',
-        integrity: 'sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=',
-        crossorigin: 'anonymous',
-      },
-      {
-        src: 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.js',
-      },
-    ],
+  app: {
+    head: {
+      title: 'Cookbook inc.',
+      meta: [
+        { charset: 'utf-8' },
+        {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1',
+        },
+        {
+          name: 'description',
+          content:
+            'Cookbooks HQ is the app that lets you peek around anonymously for recipes for absolutely no fee atall! until you decide to no longer be anonymous. You can register to become a contributor to start adding recipes to the global recipes base.',
+        },
+        {
+          name: 'keywords',
+          content:
+            'recipes, cookbooks, recipes varieties, free recipes, free cookboks, create and learn, gloabl, intercontinental, vegan, homemade, all recipes, ketogenic, health and wellness, fit fam',
+        },
+        {
+          name: 'author',
+          content: 'Cookbooks HQ',
+        },
+      ],
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.css',
+        },
+      ],
+      script: [
+        {
+          src: 'https://code.jquery.com/jquery-3.3.1.min.js',
+          integrity: 'sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=',
+          crossorigin: 'anonymous',
+        },
+        {
+          src: 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.js',
+        },
+      ],
+    },
   },
-  css: ['semantic-ui-css/semantic.min.css', '@/assets/css/style.css'],
+  css: ['@/assets/css/style.css'],
 })

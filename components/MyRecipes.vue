@@ -20,8 +20,8 @@
       <div class="ui segment">
         <UploadImage
           :description="uploadMessageDescription"
-          :imageDimensionMsg="imageDimensionMsg"
-          :acceptTypes="acceptTypes"
+          :image-dimension-msg="imageDimensionMsg"
+          :accept-types="acceptTypes"
         />
         <div class="ui horizontal divider">Or</div>
         <div class="ui form">
@@ -62,12 +62,12 @@
               <a href="/#/help?doc=templates"> see templates </a>
             </span>
           </label>
-          <vue-editor
+          <!-- <vue-editor
             v-model="recipeDescription"
             :editorOptions="editorSettings"
             :editorToolbar="customToolbar"
             placeholder="A very good description will be several characters long. A well detailed recipe keeps your followers engaged and keep coming back for more. Not sure how to start? Check out our sample templates."
-          />
+          /> -->
         </div>
       </div>
       <br />
@@ -108,16 +108,16 @@
             <div class="ui grid">
               <div class="six wide computer column sixteen wide mobile column">
                 <button
-                  @click="addField(input, ingredients)"
                   class="fluid ui black outline button"
+                  @click="addField(input, ingredients)"
                 >
                   <i class="plus circle icon"></i>new item
                 </button>
               </div>
               <div class="ten wide computer column sixteen wide mobile column">
                 <button
-                  @click="removeField(index, ingredients)"
                   class="fluid ui tbb button"
+                  @click="removeField(index, ingredients)"
                 >
                   <i class="minus circle icon"></i>remove item
                 </button>
@@ -171,7 +171,7 @@
       </div>
       <div v-else>
         <div class="ui items">
-          <div class="item" v-for="recipe in _myRecipes">
+          <div v-for="recipe in _myRecipes" :key="recipe.id" class="item">
             <div class="ui tiny image">
               <img :src="recipe.imgUrl" />
             </div>
@@ -179,20 +179,14 @@
               <a class="header" href="">
                 <small>
                   <span>
-                    <NuxtLink
-                      :to="{ path: '/recipes', params: { slug: recipe.slug } }"
-                    >
+                    <NuxtLink :to="`/recipes/${recipe.slug}`">
                       {{ recipe.name }}
                     </NuxtLink>
                   </span>
                 </small>
               </a>
               <span style="float: right !important; font-size: 16px">
-                <NuxtLink
-                  :to="{ path: '/recipes', params: { slug: recipe.slug } }"
-                >
-                  edit
-                </NuxtLink>
+                <NuxtLink :to="`/recipes/${recipe.slug}`"> edit </NuxtLink>
               </span>
               <div class="meta">
                 <span>
@@ -208,7 +202,6 @@
 </template>
 
 <script lang="ts">
-import { VueEditor } from 'vue3-editor'
 export default defineNuxtComponent({
   mounted() {
     const username = this.$store.state.username
@@ -283,17 +276,14 @@ export default defineNuxtComponent({
       field.splice(index, 1)
     },
   },
-  components: {
-    VueEditor,
-  },
 })
 </script>
 
 <style scoped>
-@import '~vue3-editor/dist/vue3-editor.css';
+/* @import '~vue2-editor/dist/vue2-editor.css';
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.bubble.css';
-@import '~quill/dist/quill.snow.css';
+@import '~quill/dist/quill.snow.css'; */
 
 .hideshowicon i {
   cursor: pointer !important;

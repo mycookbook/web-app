@@ -5,20 +5,15 @@
         <div class="ui small breadcrumb">
           <a class="section" href="/">back home</a>
           <i class="left chevron icon divider"></i>
-          <div class="active section" v-if="activeLink === 'My Dashboard'">
+          <div v-if="activeLink === 'My Dashboard'" class="active section">
             public profile
           </div>
-          <div class="active section" v-else>
+          <div v-else class="active section">
             <div v-if="isCookbookRoute()">
               {{ active }}
             </div>
             <div v-else>
-              <NuxtLink
-                :to="{
-                  name: parentComponentName,
-                  params: { slug: parentSlug },
-                }"
-              >
+              <NuxtLink :to="path">
                 {{ active }}
               </NuxtLink>
               <i class="left chevron icon divider"></i> {{ child }}
@@ -35,7 +30,7 @@ export default defineNuxtComponent({
   props: {
     active: String,
     parentSlug: String,
-    parentComponentName: String,
+    path: String,
     child: String,
   },
   computed: {

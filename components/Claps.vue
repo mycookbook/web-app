@@ -7,7 +7,7 @@
   >
     <span>
       <i class="ui heart icon"></i>
-      {{ numberFormatter(totalCount) }} Claps
+      {{ totalCount }} Claps
     </span>
   </div>
 </template>
@@ -19,16 +19,14 @@ export default defineNuxtComponent({
   },
   computed: {
     totalCount() {
-      return this.$store.state.recipe.claps || 0
+      // we can format the below value
+      return this.$store.state.recipe?.claps || 0
     },
     hasReachedMaximumAllowedThreshold() {
       return (
         this.$store.state.recipeStore.hasClapped >=
         this.$store.state.recipeStore.maxAllowedClaps
       )
-    },
-    numberFormatter(value) {
-      return value
     },
   },
   methods: {

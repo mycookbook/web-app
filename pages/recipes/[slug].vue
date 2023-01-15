@@ -7,10 +7,9 @@
     <div v-else>
       <br /><br /><br />
       <Breadcrumb
-        :active="recipe.cookbook.name"
-        :parentComponentName="'Cookbook'"
-        :parentSlug="recipe.cookbook.slug"
-        :child="recipe.name"
+        :active="recipe?.cookbook?.name"
+        :path="`/cookbooks/${recipe?.cookbook?.slug}`"
+        :child="recipe?.name"
       />
       <div class="ui grid">
         <div class="sixteen wide computer column sixteen wide mobile column">
@@ -28,7 +27,7 @@
             >
               <div class="ui mini images">
                 <img
-                  v-for="ingredient in recipe.ingredients.data"
+                  v-for="ingredient in recipe?.ingredients?.data"
                   :key="ingredient.name"
                   class="ui image"
                   :src="ingredient.thumbnail"
@@ -39,7 +38,7 @@
                   :style="{ display: 'inline-flex', height: '35px' }"
                 />
               </div>
-              <img :src="recipe.imgUrl" :alt="recipe.name" class="zoom" />
+              <img :src="recipe?.imgUrl" :alt="recipe?.name" class="zoom" />
               <div class="talkify-section">
                 <div class="ui header padded">
                   <span> HOW TO PREPARE </span>
@@ -48,7 +47,7 @@
                     @click="textToSpeech()"
                   >
                     <button class="ui right labeled icon tbb button">
-                      <i class="right headphone icon"></i>
+                      <i class="right icon headphone"></i>
                       Listen
                     </button>
                     <span
@@ -61,7 +60,7 @@
                   </span>
                 </div>
                 <div
-                  v-html="recipe.description"
+                  v-html="recipe?.description"
                   class="ui left aligned text"
                 ></div>
               </div>
@@ -72,10 +71,11 @@
                   class="sixteen wide computer column sixteen wide mobile column"
                 >
                   <Follow
-                    :followers="recipe.author.followers"
-                    :author="recipe.author.name"
-                    :avatar="recipe.author.avatar"
-                    :handle="recipe.author.name_slug"
+                    v-if="recipe?.author"
+                    :followers="recipe?.author?.followers"
+                    :author="recipe?.author?.name"
+                    :avatar="recipe?.author?.avatar"
+                    :handle="recipe?.author?.name_slug"
                   />
                 </div>
               </div>
@@ -124,8 +124,9 @@
                   class="sixteen wide computer column sixteen wide mobile column"
                 >
                   <Comments
+                    v-if="_recipeComments"
                     :comments="_recipeComments"
-                    :author_id="recipe.id"
+                    :author_id="recipe?.id"
                   />
                 </div>
               </div>
@@ -143,22 +144,18 @@
 export default defineNuxtComponent({
   mounted() {
     window.scrollTo(0, 0)
-    const id = !this.$route.params.id
-      ? this.$route.params.slug
-      : this.$route.params.id
-    this.$store.dispatch('fetch_recipe', id)
+    this.$store.dispatch('fetch_recipe', this.$route.params.slug)
   },
   props: ['slug', 'id'],
   computed: {
     recipe() {
-      return this.$store.state.recipe
+      return this.$store.state.recipe || {}
     },
     isLoading() {
       return this.$store.state.resource_isLoading
     },
     _recipeComments() {
-      this.recipeComments = this.$store.state.recipe.comments
-
+      this.recipeComments = this.$store.state.recipe?.comments || []
       return this.recipeComments
     },
     _isLoggedIn() {
