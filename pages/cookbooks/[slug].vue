@@ -181,14 +181,11 @@
 // definePageMeta({
 //   middleware: ['auth'],
 // })
-import $ from 'jquery'
-
 export default defineNuxtComponent({
   async mounted() {
     window.scrollTo(0, 0)
     const { params } = this.$route
-    const id = !params.id ? params.slug : params.id
-    await this.$store.dispatch('fetch_cookbook', id)
+    await this.$store.dispatch('fetch_cookbook', params.slug)
   },
   computed: {
     cookbook() {

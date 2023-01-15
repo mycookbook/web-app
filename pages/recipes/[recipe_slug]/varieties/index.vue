@@ -22,16 +22,7 @@
             <div class="four wide computer column sixteen wide mobile column">
               <div class="ui ribbon label">Prep &#38; cook Time: 45 mins</div>
               <div>
-                <NuxtLink
-                  :to="{
-                    path: '/recipes/:recipe_slug/varieties/:variety_slug',
-                    params: {
-                      cookbookId: cookbook.id,
-                      recipeId: recipe.id,
-                      varietyId: v.id,
-                    },
-                  }"
-                >
+                <NuxtLink :to="`/recipes/${recipe.slug}/varieties/${v.id}`">
                   <img class="ui massive image" :src="v.imgUrl" :alt="v.name" />
                 </NuxtLink>
               </div>

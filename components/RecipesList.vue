@@ -33,7 +33,7 @@
     <div v-if="recipes.length > 0" style="margin-left: 10%">
       <br />
       <div v-for="recipe in recipes" :key="recipe.id" class="ui card">
-        <NuxtLink :to="{ path: '/recipes', params: { slug: recipe.slug } }">
+        <NuxtLink :to="`/recipes/${recipe.slug}`">
           <div class="ui link cards" title="click to view recipe">
             <div class="card">
               <div class="ui fluid image">
