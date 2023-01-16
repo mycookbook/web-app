@@ -196,13 +196,6 @@ export default defineNuxtComponent({
     _myCookbooks() {
       return this.$store.state.contributor.cookbooks
     },
-    truncate: function (text, length, suffix) {
-      if (text.length > length) {
-        return text.substring(0, length) + suffix
-      } else {
-        return text
-      }
-    },
   },
   data() {
     return {
@@ -219,6 +212,13 @@ export default defineNuxtComponent({
     }
   },
   methods: {
+    truncate(text, length, suffix) {
+      if (text.length > length) {
+        return text.substring(0, length) + suffix
+      } else {
+        return text
+      }
+    },
     toggleEditor(action) {
       if (action === 'hide') {
         $('#cookbook-editor').addClass('show')

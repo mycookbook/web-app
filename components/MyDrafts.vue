@@ -65,8 +65,8 @@ export default defineNuxtComponent({
   },
   computed: {
     _myDrafts() {
-      const recipes = this.$store.state.contributor.recipes
-      const cookbooks = this.$store.state.contributor.cookbooks
+      const recipes = this.$store.state.contributor?.recipes || []
+      const cookbooks = this.$store.state.contributor?.cookbooks || []
       const _recipes = recipes.filter(function (recipe) {
         return recipe.is_draft === true
       })
@@ -76,7 +76,9 @@ export default defineNuxtComponent({
 
       return _recipes.concat(_cookbooks)
     },
-    truncate: function (text, length, suffix) {
+  },
+  methods: {
+    truncate(text, length, suffix) {
       if (text.length > length) {
         return text.substring(0, length) + suffix
       } else {

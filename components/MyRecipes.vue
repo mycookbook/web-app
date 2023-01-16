@@ -215,20 +215,13 @@ export default defineNuxtComponent({
       return JSON.parse(contents)
     },
     _myRecipes() {
-      const recipes = this.$store.state.contributor.recipes
+      const recipes = this.$store.state.contributor?.recipes || []
       return recipes.filter(function (recipe) {
         return recipe.is_draft === false
       })
     },
     editorSettings() {
       return { theme: 'snow' }
-    },
-    truncate: function (text, length, suffix) {
-      if (text.length > length) {
-        return text.substring(0, length) + suffix
-      } else {
-        return text
-      }
     },
   },
   data() {
@@ -274,6 +267,13 @@ export default defineNuxtComponent({
     },
     removeField(index, field) {
       field.splice(index, 1)
+    },
+    truncate(text, length, suffix) {
+      if (text.length > length) {
+        return text.substring(0, length) + suffix
+      } else {
+        return text
+      }
     },
   },
 })

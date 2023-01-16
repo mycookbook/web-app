@@ -32,19 +32,9 @@
         <div class="ui divided selection list capitalize">
           <a
             v-for="result in results.slice(0, 5)"
-            :key="result.recipe_slug"
+            :key="result.slug"
             class="item"
-            @click="
-              redirectTo(
-                result.resource_type,
-                result.resource_type == 'cookbook'
-                  ? result.cookbook_slug
-                  : result.recipe_slug,
-                result.resource_type == 'cookbook'
-                  ? result.cookbook_id
-                  : result.recipe_id
-              )
-            "
+            @click="redirectTo(result)"
           >
             <div
               :class="getClass(result.resource_type)"
@@ -122,16 +112,14 @@ export default defineNuxtComponent({
       query: '',
     }
   },
-  computed: {
-    truncate: function (text, length, suffix) {
+  methods: {
+    truncate(text, length, suffix) {
       if (text.length > length) {
         return text.substring(0, length) + suffix
       } else {
         return text
       }
     },
-  },
-  methods: {
     async search(e) {
       if (this.query.length > 3) {
         if (e.which === 13) {
@@ -183,18 +171,9 @@ export default defineNuxtComponent({
 
       return link
     },
-    redirectTo(type, slug, id) {
-      let name = 'default'
-
-      if (type === 'cookbook') {
-        name = 'Cookbook'
-      }
-
-      if (type === 'recipe') {
-        name = 'Recipe'
-      }
-
-      this.$router.replace({ name, params: { slug, id } })
+    redirectTo(result) {
+      const { resource_type: resourceType, slug } = result
+      this.$router.replace(`/${resourceType}s/${slug}`)
     },
   },
 })

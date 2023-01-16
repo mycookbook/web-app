@@ -11,11 +11,11 @@
       <div
         class="thirteen wide computer column sixteen wide mobile column sixteen wide tablet column"
       >
-        <div class="ui huge header">
+        <!-- <div class="ui huge header">
           Showing {{ results.length }} of {{ results.length }} results for "{{
             showing
           }}"
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="ui grid">
@@ -106,7 +106,7 @@
           </span>
         </div>
         <br />
-        <div v-for="result in results" class="capitalize">
+        <div v-for="result in results" :key="result.id" class="capitalize">
           <div>
             <span
               v-if="result.resource_type === 'cookbook' && result.is_locked"
@@ -137,18 +137,19 @@
             </span>
             <span style="float: right; text-transform: lowercase">
               <small>
-                <span v-if="result.contains.length > 0">
+                <span v-if="result.contains && result.contains.length > 0">
                   includes
                   <span
                     style="background-color: #ffff00"
                     v-for="contain in result.contains"
+                    :key="contain"
                   >
                     {{ contain }}
                   </span>
                 </span>
-                <span v-if="result.missing.length > 0">
+                <span v-if="result.missing && result.missing.length > 0">
                   : missing
-                  <span v-for="missing in result.missing"
+                  <span v-for="missing in result.missing" :key="missing"
                     ><s>
                       {{ missing }}
                     </s></span
@@ -161,17 +162,13 @@
             <a class="link">
               <div
                 v-if="isCookbook(result.resource_type)"
-                @click="
-                  redirectTo(result.resource_type, result.slug, result.id)
-                "
+                @click="redirectTo(result.resource_type, result.slug)"
               >
                 <h4>{{ result.name }}</h4>
               </div>
               <div
                 v-if="isRecipe(result.resource_type)"
-                @click="
-                  redirectTo(result.resource_type, result.slug, result.id)
-                "
+                @click="redirectTo(result.resource_type, result.slug)"
               >
                 <h4>{{ result.name }}</h4>
               </div>
@@ -241,30 +238,17 @@ export default defineNuxtComponent({
       }
     },
     searchForQuery(e) {
-      if (e.which == 13) {
-        //only when the keyup event is triggered by the enter key
-        console.log('qq', $('#sq').val())
-        let qStr = $('#sq').val()
-        let name = 'SearchResults'
-        this.$router.replace({ name, query: { q: qStr } })
+      if (e.which === 13) {
+        const qStr = $('#sq').val()
+        this.$router.replace(`/search?q=${qStr}`)
         this.searchq = qStr
       }
 
       this.$store.dispatch('empty_results_object')
       this.$store.dispatch('fetch_results', this.searchq)
     },
-    redirectTo(type, slug, id) {
-      let name = 'default'
-
-      if (type === 'cookbook') {
-        name = 'Cookbook'
-      }
-
-      if (type === 'recipe') {
-        name = 'Recipe'
-      }
-
-      this.$router.replace({ name, params: { slug, id } })
+    redirectTo(type, slug) {
+      this.$router.replace(`/${type}s/${slug}`)
     },
     sortBy(order) {
       this.$store.dispatch('sort_results_by', order)
