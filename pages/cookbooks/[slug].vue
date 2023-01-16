@@ -178,9 +178,9 @@
 </template>
 
 <script lang="ts">
-// definePageMeta({
-//   middleware: ['auth'],
-// })
+definePageMeta({
+  middleware: ['auth'],
+})
 export default defineNuxtComponent({
   async mounted() {
     window.scrollTo(0, 0)

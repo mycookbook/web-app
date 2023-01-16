@@ -82,10 +82,10 @@
                 </div>
                 <div v-if="activeLink === 'Display Settings'">
                   <p>Enable/Disable Dark Mode</p>
-                  <DarkModeSwitch
+                  <!-- <DarkModeSwitch
                     :initialState="isDarkModeEnabled"
                     @switched="onSwitched"
-                  />
+                  /> -->
                 </div>
                 <div v-if="activeLink === 'Notifications'">
                   My notifications
@@ -126,6 +126,8 @@ export default defineNuxtComponent({
   },
   computed: {
     activeLink() {
+      console.log('this.$route.query.tab: ', this.$route.query.tab);
+
       return this.$route.query.tab
     },
     _activeUser() {

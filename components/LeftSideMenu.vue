@@ -37,7 +37,12 @@
       </div> -->
       <div class="item">
         <div class="content">
-          <NuxtLink to="/dashboard?tab=Recipes">
+          <NuxtLink
+            :to="{
+              path: '/dashboard',
+              query: { tab: 'Recipes' },
+            }"
+          >
             <div>
               <small>
                 <u>
@@ -51,7 +56,12 @@
       </div>
       <div class="item">
         <div class="content">
-          <NuxtLink to="/dashboard?tab=Drafts">
+          <NuxtLink
+            :to="{
+              path: '/dashboard',
+              query: { tab: 'Drafts' },
+            }"
+          >
             <div>
               <small>
                 <u> Drafts {{ _drafts ? _drafts.length : 0 }} </u>
@@ -63,7 +73,12 @@
       <br />
       <div class="item">
         <div class="content">
-          <NuxtLink to="/search?tab=Preferences">
+          <NuxtLink
+            :to="{
+              path: '/dashboard',
+              query: { tab: 'Preferences' },
+            }"
+          >
             <div>
               <small>
                 <u> Preferences </u>
@@ -75,7 +90,12 @@
       <br />
       <div class="item">
         <div class="content">
-          <NuxtLink to="/dashboard?tab=Profile">
+          <NuxtLink
+            :to="{
+              path: '/dashboard',
+              query: { tab: 'Profile' },
+            }"
+          >
             <div>
               <small> <i class="ui picture icon"></i> My Profile </small>
             </div>
@@ -84,7 +104,12 @@
       </div>
       <div class="ui item">
         <div class="content">
-          <NuxtLink to="/dashboard?tab=Notifications">
+          <NuxtLink
+            :to="{
+              path: '/dashboard',
+              query: { tab: 'Notifications' },
+            }"
+          >
             <div>
               <small><i class="ui bell icon"></i> Notifications 0</small>
             </div>
@@ -93,7 +118,12 @@
       </div>
       <div class="item">
         <div class="content">
-          <NuxtLink :to="`/dashboard?tab=Privacy Settings`">
+          <NuxtLink
+            :to="{
+              path: '/dashboard',
+              query: { tab: 'Privacy Settings' },
+            }"
+          >
             <div>
               <small> <i class="ui lock icon"></i> Privacy Settings </small>
             </div>
@@ -169,14 +199,14 @@
 export default defineNuxtComponent({
   computed: {
     _recipes() {
-      const recipes = this.$store.state.contributor.recipes
+      const recipes = this.$store.state.contributor?.recipes || []
       return recipes.filter(function (recipe) {
         return recipe.is_draft === false
       })
     },
     _drafts() {
-      const recipes = this.$store.state.contributor.recipes
-      const cookbooks = this.$store.state.contributor.cookbooks
+      const recipes = this.$store.state.contributor?.recipes || []
+      const cookbooks = this.$store.state.contributor?.cookbooks || []
       const _recipes = recipes.filter(function (recipe) {
         return recipe.is_draft === true
       })
