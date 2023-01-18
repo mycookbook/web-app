@@ -51,6 +51,9 @@ const actions = {
       context.commit('UPDATE_RECIPE_STATE', response.data)
       context.commit('SET_LOADING_STATE', false)
     } catch (error) {
+      alert(
+        'We are having trouble loading this recipe. Please refresh or try again later.'
+      )
       console.error('fetch error', error)
       context.commit('SET_LOADING_STATE', false)
     }

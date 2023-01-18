@@ -5,5 +5,7 @@ module.exports = {
     'stylelint-config-recommended-vue',
     'stylelint-config-prettier',
   ],
-  rules: {},
+  rules: {
+    'custom-property-no-missing-var-function': false,
+  },
 }

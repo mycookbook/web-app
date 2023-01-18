@@ -23,3 +23,15 @@ export const makeIpInfoRequest = () => {
     },
   })
 }
+
+export const makeTokenValidationRequest = (accessToken: string) => {
+  const {
+    public: { tokenValidateEndpoint },
+  } = useRuntimeConfig()
+  return axios({
+    url: tokenValidateEndpoint,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
+}

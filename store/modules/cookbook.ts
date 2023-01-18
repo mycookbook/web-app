@@ -66,7 +66,6 @@ const actions = {
   },
   async fetch_cookbook(context, cookbookId) {
     context.commit('SET_LOADING_STATE', true)
-
     try {
       const response = await makeRequest(`cookbooks/${cookbookId}`)
       context.commit('UPDATE_COOKBOOK_STATE', response.data)
