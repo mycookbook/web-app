@@ -64,6 +64,9 @@ export default defineNuxtConfig({
           crossorigin: 'anonymous',
         },
         {
+          src: 'https://cdn.jsdelivr.net/npm/talkify-tts@2.1.2/dist/talkify.min.js',
+        },
+        {
           src: 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.js',
         },
       ],
