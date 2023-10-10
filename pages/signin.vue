@@ -59,14 +59,14 @@ export default defineNuxtComponent({
   methods: {
     authRedirect(provider) {
       const config = useRuntimeConfig()
+      const router = useRouter()
+
       if (provider === 'magicLink') {
         alert(
           'This feature is limited to ONLY authorized users. Please login with TikTok instead.'
         )
       } else if (process.env.NODE_ENV === 'development') {
-        const router = useRouter()
         router.replace({ path: '/tiktok' })
-        // window.location.href = `${config.public.appUrl}/tiktok`
       } else {
         let uriParams = {}
 
@@ -89,7 +89,10 @@ export default defineNuxtComponent({
         for (const param in uriParams) {
           url.searchParams.set(param, uriParams[param])
         }
-        window.location.href = url.toString()
+
+        await navigateTo(url.toString(), {
+            external: true
+        })
       }
     },
   },
