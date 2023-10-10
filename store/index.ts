@@ -32,13 +32,6 @@ export const store = createStore({
         registration_form: {},
         contact_form: {},
       },
-      api: {
-        options: {
-          headers: {
-            Authorization: `Bearer ${this?.token}`,
-          },
-        },
-      },
       response: {
         statuses: {
           unauthorized: 401,
@@ -61,14 +54,15 @@ export const store = createStore({
           { data: cookbooksData },
           { data: policiesData },
         ] = await Promise.all([
-          makeRequest('definitions', this.state.api.options),
-          makeRequest('cookbooks', this.state.api.options),
-          makeRequest('policies', this.state.api.options),
+          makeRequest('https://api.cookbookshq.com/api/v1/definitions'),
+          makeRequest('https://api.cookbookshq.com/api/v1/cookbooks'),
+          makeRequest('https://api.cookbookshq.com/api/v1/policies'),
         ])
+
         context.commit('SET_LOADING_STATE', false)
         context.commit('STORE_DEFINITIONS', definitionData)
         context.commit('STORE_COOKBOOKS', cookbooksData.data)
-        context.commit('STORE_POLICIES', policiesData.response)
+        context.commit('STORE_POLICIES', policiesData)
       } catch (error) {
         if (
           error.response &&
@@ -121,10 +115,10 @@ export const store = createStore({
   },
   mutations: {
     STORE_POLICIES(state, policies) {
-      state.policies.cookiePolicy = policies.cookiePolicy.content
-      state.policies.usagePolicy = policies.usagePolicy.content
-      state.policies.dataRetentionPolicy = policies.dataRetentionPolicy.content
-      state.policies.termsAndConditons = policies.termsAndConditions.content
+      state.policies.cookiePolicy = policies.cookiePolicy
+      state.policies.usagePolicy = policies.usagePolicy
+      state.policies.dataRetentionPolicy = policies.dataRetentionPolicy
+      state.policies.termsAndConditons = policies.termsAndConditions
     },
     SET_LOADING_STATE(_, status) {
       this.state.resource_isLoading = status
