@@ -90,7 +90,7 @@ export default defineNuxtComponent({
           url.searchParams.set(param, uriParams[param])
         }
 
-        await navigateTo(url.toString(), {
+        navigateTo(url.toString(), {
             external: true
         })
       }
