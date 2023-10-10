@@ -36,6 +36,14 @@ export default defineNuxtComponent({
   },
   mounted() {
     this.$store.dispatch('boot')
+    
+    if (this.$route.query._d && this.$route.query.code) {
+        const code = this.$route.query.code
+        const _d = this.$route.query._d
+
+        this.$store.dispatch('set_active_user', {code,_d})
+        this.$store.dispatch('fetch_active_user', _d)
+    }
   },
   methods: {
     loaded() {

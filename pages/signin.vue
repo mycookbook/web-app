@@ -64,7 +64,9 @@ export default defineNuxtComponent({
           'This feature is limited to ONLY authorized users. Please login with TikTok instead.'
         )
       } else if (process.env.NODE_ENV === 'development') {
-        window.location.href = `${config.public.appUrl}/#/provider/?code=&_d=`
+        const router = useRouter()
+        router.replace({ path: '/tiktok' })
+        // window.location.href = `${config.public.appUrl}/tiktok`
       } else {
         let uriParams = {}
 
