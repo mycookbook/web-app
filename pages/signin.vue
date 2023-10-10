@@ -66,17 +66,13 @@ export default defineNuxtComponent({
           'This feature is limited to ONLY authorized users. Please login with TikTok instead.'
         )
       } else if (process.env.NODE_ENV === 'development') {
-        router.replace({ path: '/tiktok' })
+        navigateTo('/tiktok')
       } else {
         let uriParams = {}
 
         const csrfState = Math.random().toString(36).substring(2)
 
-        const oauthEndpoint = {
-          tiktok: config.public.serverOauthEndpoint,
-        }
-
-        const url = new URL(oauthEndpoint[provider])
+        const url = new URL("https://www.tiktok.com/auth/authorize")
 
         uriParams = {
           client_key: config.public.tiktokClientKey,
