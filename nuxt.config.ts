@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     // Public keys that are exposed to the client
     public: {
       appUrl: process.env.APP_URL,
-      apiBaseUrl: process.env.API_BASE_URL,
+      apiBaseUrl: "https://api.cookbookshq.com/api/v1/",
       aws: {
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
         accessKey: process.env.AWS_ACCESS_KEY,

@@ -14,10 +14,6 @@ import {
 
 import { makeRequest } from '~~/utils/makeRequest'
 
-export interface State {
-  policies: any
-}
-
 export const store = createStore({
   state() {
     return {
@@ -54,15 +50,15 @@ export const store = createStore({
           { data: cookbooksData },
           { data: policiesData },
         ] = await Promise.all([
-          makeRequest('https://api.cookbookshq.com/api/v1/definitions'),
-          makeRequest('https://api.cookbookshq.com/api/v1/cookbooks'),
-          makeRequest('https://api.cookbookshq.com/api/v1/policies'),
+          makeRequest('definitions'),
+          makeRequest('cookbooks'),
+          makeRequest('policies'),
         ])
 
         context.commit('SET_LOADING_STATE', false)
         context.commit('STORE_DEFINITIONS', definitionData)
         context.commit('STORE_COOKBOOKS', cookbooksData.data)
-        context.commit('STORE_POLICIES', policiesData)
+        context.commit('STORE_POLICIES', policiesData.response)
       } catch (error) {
         if (
           error.response &&
@@ -115,10 +111,10 @@ export const store = createStore({
   },
   mutations: {
     STORE_POLICIES(state, policies) {
-      state.policies.cookiePolicy = policies.cookiePolicy
-      state.policies.usagePolicy = policies.usagePolicy
-      state.policies.dataRetentionPolicy = policies.dataRetentionPolicy
-      state.policies.termsAndConditons = policies.termsAndConditions
+      state.policies.cookiePolicy = policies.cookiePolicy.content
+      state.policies.usagePolicy = policies.usagePolicy.content
+      state.policies.dataRetentionPolicy = policies.dataRetentionPolicy.content
+      state.policies.termsAndConditons = policies.termsAndConditions.content
     },
     SET_LOADING_STATE(_, status) {
       this.state.resource_isLoading = status

@@ -6,8 +6,8 @@ export const makeRequest = (url: string, options: AxiosRequestConfig = {}) => {
   const method = 'GET'
   return axios({
     url,
-    baseURL,
     method,
+    baseURL,
     ...options,
   })
 }
