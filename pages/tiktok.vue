@@ -14,7 +14,7 @@ definePageMeta({
     if (!code) code = config.public.devToken
 
     const router = useRouter()
-    return router.replace({ path: '/', query: {'code': code, '_d': username}})
+    return router.replace({ name: 'index', query: {'code': code, '_d': username}})
   },
 })
 </script>
