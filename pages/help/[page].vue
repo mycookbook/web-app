@@ -48,7 +48,6 @@
                         <Templates />
                     </div>
                     <div v-if="activeTab == 'faqs'">
-                        {{ activeTab }}
                         <div class="ui category search">
                             <div class="ui icon fluid input">
                                 <input class="prompt" v-model="q" type="text" @keyup="search"
