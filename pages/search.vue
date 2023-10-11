@@ -7,11 +7,11 @@
                 <h2>Trending this week</h2>
             </div>
             <div class="thirteen wide computer column sixteen wide mobile column sixteen wide tablet column">
-                <!-- <div class="ui huge header">
-          Showing {{ results.length }} of {{ results.length }} results for "{{
-            showing
-          }}"
-        </div> -->
+                <div class="ui huge header">
+                    Showing {{ results.length }} of {{ results.length }} results for "{{
+                        showing
+                    }}"
+                </div>
             </div>
         </div>
         <div class="ui grid">
@@ -89,25 +89,39 @@
                 <br />
                 <div v-for="result in results" :key="result.id" class="capitalize">
                     <div>
-                        <span v-if="result.resource_type === 'cookbook' && result.is_locked">
-                            <i class="ui lock icon"></i> <small>Private</small>
-                        </span>
-                        <span v-if="result.resource_type === 'cookbook' && !result.is_locked">
-                            <i class="ui unlock icon"></i> <small>Community</small>
-                        </span>
-                        <span v-if="result.resource_type === 'recipe' &&
-                            result.author_can_take_orders
-                            ">
-                            <i class="shopping basket icon"></i>
-                        </span>
-                        <span>
-                            <small>
-                                <b>{{ result.resource_type }}</b> >
-                                <a :href="getUri('contributor', result.username)">
-                                    By {{ result.author.name }}</a>
-                                > {{ result.created_at }}
-                            </small>
-                        </span>
+                        <div v-if="result.resource_type === 'cookbook'">
+                            <span v-if="result.is_locked">
+                                <i class="ui lock icon"></i> <small>Private </small>
+                            </span>
+                            <span v-else>
+                                <i class="ui unlock icon"></i> <small>Community </small>
+                            </span>
+                            <span>
+                                <small>
+                                    <b>{{ result.resource_type }}</b> >
+                                    <NuxtLink :to="getTo(result.author.name_slug)">
+                                        {{ result.author.name_slug }}
+                                    </NuxtLink>
+                                    > {{ result.created_at }}
+                                </small>
+                            </span>
+                        </div>
+
+                        <div v-if="result.resource_type === 'recipe'">
+                            <span v-if="result.author_can_take_orders">
+                                <i class="shopping basket icon"></i>
+                            </span>
+                            <span>
+                                <small>
+                                    <b>{{ result.resource_type }}</b> >
+                                    <NuxtLink :to="getTo(result.author.name_slug)">
+                                        {{ result.author.name_slug }}
+                                    </NuxtLink>
+                                    > {{ result.created_at }}
+                                </small>
+                            </span>
+                        </div>
+
                         <span style="float: right; text-transform: lowercase">
                             <small>
                                 <span v-if="result.contains && result.contains.length > 0">
@@ -128,12 +142,7 @@
                     </div>
                     <div>
                         <a class="link">
-                            <div v-if="isCookbook(result.resource_type)"
-                                @click="redirectTo(result.resource_type, result.slug)">
-                                <h4>{{ result.name }}</h4>
-                            </div>
-                            <div v-if="isRecipe(result.resource_type)"
-                                @click="redirectTo(result.resource_type, result.slug)">
+                            <div @click="redirectTo(result.resource_type, result.slug)">
                                 <h4>{{ result.name }}</h4>
                             </div>
                         </a>
@@ -188,18 +197,8 @@ export default defineNuxtComponent({
         isRecipe(type) {
             return type === 'recipe'
         },
-        getUri(type, c, r) {
-            if (type === 'cookbook') {
-                return '/#/cookbooks/' + c
-            }
-
-            if (type === 'recipe') {
-                return '/#/recipes/' + r
-            }
-
-            if (type === 'contributor') {
-                return '/#/contributors/' + c
-            }
+        getTo(name) {
+            return '/contributors/' + name
         },
         searchForQuery(e) {
             if (e.which === 13) {
