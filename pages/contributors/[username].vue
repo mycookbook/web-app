@@ -27,15 +27,15 @@
             >
             <div>
               <small>
-                <a :href="'#/search?q=:cookbooks|author ' + contributor.name">
+                <!-- <a :href="'#/search?q=:cookbooks|author ' + contributor.name">
                   Browse my cookbooks {{ contributor.contributions.cookbooks }}
-                </a>
+                </a> -->
               </small>
               <br />
               <small>
-                <a :href="'#/search?q=:recipes|author ' + contributor.name">
+                <!-- <a :href="'#/search?q=:recipes|author ' + contributor.name">
                   Browse my recipes {{ contributor.contributions.recipes }}
-                </a>
+                </a> -->
               </small>
             </div>
             <br />
