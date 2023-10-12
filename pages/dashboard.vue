@@ -1,7 +1,7 @@
 <template>
-  <div class="ui container">
-    <Navigation />
-    <div class="ui grid">
+    <div class="ui container">
+        <Navigation />
+        <!-- <div class="ui grid">
       <div class="sixteen wide computer column sixteen wide mobile column">
         <div class="ui grid">
           <div
@@ -82,17 +82,17 @@
                 </div>
                 <div v-if="activeLink === 'Display Settings'">
                   <p>Enable/Disable Dark Mode</p>
-                  <!-- <DarkModeSwitch
+                  <DarkModeSwitch
                     :initialState="isDarkModeEnabled"
                     @switched="onSwitched"
-                  /> -->
+                  />
                 </div>
                 <div v-if="activeLink === 'Notifications'">
                   My notifications
                 </div>
                 <div v-if="activeLink === 'Profile'">
                   {{ _activeUser }}
-                  <!-- <Profile :_activeUser="_activeUser" /> -->
+                  <Profile :_activeUser="_activeUser" />
                 </div>
               </div>
             </div>
@@ -108,48 +108,48 @@
           </div>
         </div>
       </div>
+    </div> -->
+        <Contact />
+        <Bottom />
     </div>
-    <Contact />
-    <Bottom />
-  </div>
 </template>
 
 <script lang="ts">
 import DarkModeSwitch from 'vue-dark-mode-switch'
 import 'vue-dark-mode-switch/dist/vue-dark-mode-switch.css'
-definePageMeta({
-  middleware: ['auth'],
-})
+// definePageMeta({
+//   middleware: ['auth'],
+// })
 export default defineNuxtComponent({
-  components: {
-    DarkModeSwitch,
-  },
-  computed: {
-    activeLink() {
-      console.log('this.$route.query.tab: ', this.$route.query.tab);
+    components: {
+        DarkModeSwitch,
+    },
+    computed: {
+        activeLink() {
+            console.log('this.$route.query.tab: ', this.$route.query.tab);
 
-      return this.$route.query.tab
+            return this.$route.query.tab
+        },
+        _activeUser() {
+            return this.$store.state.active_user
+        },
     },
-    _activeUser() {
-      return this.$store.state.active_user
+    data() {
+        return {
+            uploadMessageDescription: 'Upload Cookbook Cover Image',
+            isDarkModeEnabled: true,
+        }
     },
-  },
-  data() {
-    return {
-      uploadMessageDescription: 'Upload Cookbook Cover Image',
-      isDarkModeEnabled: true,
-    }
-  },
-  methods: {
-    onSwitched: function (isSwitched) {
-      console.log('dark mode is enabled :', isSwitched)
+    methods: {
+        onSwitched: function (isSwitched) {
+            console.log('dark mode is enabled :', isSwitched)
+        },
     },
-  },
 })
 </script>
 
 <style scoped>
 .container {
-  margin-top: 23vh;
+    margin-top: 23vh;
 }
 </style>

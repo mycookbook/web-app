@@ -4,7 +4,7 @@
             <div class="six wide tablet column six wide computer column tvn no padding">
                 <div class="tvn clipped brand">
                     <a href="/" class="ui massive fluid image" title="cookbookshq brand logo">
-                        <img class="logo" src="transparent_logo.png" alt="cookbookinc brand logo">
+                        <img class="logo" src="~/assets/img/transparent_logo.png" alt="cookbookinc brand logo">
                     </a>
                 </div>
             </div>
