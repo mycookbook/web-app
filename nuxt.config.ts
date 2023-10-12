@@ -19,6 +19,7 @@ export default defineNuxtConfig({
         bucket: process.env.AWS_BUCKET,
         region: process.env.AWS_REGION,
       },
+      devUser: process.env.DEV_USER,
       devToken: process.env.DEV_TOKEN,
       ipInfoUri: 'https://ipinfo.io',
       ipInfoToken: process.env.IPINFO_TOKEN,

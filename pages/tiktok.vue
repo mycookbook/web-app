@@ -3,17 +3,15 @@
 definePageMeta({
   middleware() {
     const config = useRuntimeConfig()
-    const queryString = window.location.href
-    const replaced = queryString.replace('/##/', '/')
-    const url = new URL(replaced)
+    const route = useRoute()
+    const router = useRouter()
 
-    let code = url.searchParams.get('token')
-    let username = url.searchParams.get('_d')
+    let code = route.query.token
+    let username = route.query._d
 
-    if (!username) username = 'test-user'
+    if (!username) username = config.public.devUser
     if (!code) code = config.public.devToken
 
-    const router = useRouter()
     return router.replace({ name: 'index', query: {'code': code, '_d': username}})
   },
 })
