@@ -11,7 +11,6 @@
 						style="border:1px solid #f1f1f1;border-radius: 8px; width: 100%; height: auto;">
 						<DashboardBreadcrumb :active="activeLink" />
 						<div class="ui horizontal divider"></div>
-						<br />
 						<div class="ui grid">
 							<div class="sixteen wide computer column sixteen wide mobile column">
 								<div v-if="activeLink === 'Recipes'">

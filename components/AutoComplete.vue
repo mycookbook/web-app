@@ -11,7 +11,7 @@
                     <small>
                         no results.
                         <em>
-                            Know how to prepare <span id="q-str">{{ q-str }}</span>? <a href="/register">Add it</a>
+                            Know how to prepare <span id="q-str">{{ qStr }}</span>? <a href="/register">Add it</a>
                         </em>
                     </small>
                     <hr />
@@ -71,7 +71,7 @@ export default defineNuxtComponent({
     data() {
         return {
             searching: false,
-            q-str: '',
+            qStr: '',
             results: [],
             query: '',
         }
@@ -92,7 +92,7 @@ export default defineNuxtComponent({
                 }
 
                 this.results = []
-                this.q-str = this.query
+                this.qStr = this.query
 
                 try {
                     const response = await makeRequest('search', {

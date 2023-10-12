@@ -42,11 +42,10 @@ export default defineNuxtComponent({
             const _d = this.$route.query._d
 
             this.$store.dispatch('set_active_user', { code, _d })
-            this.$store.dispatch('fetch_active_user', _d)
-        }
 
-        const router = useRouter()
-        this.$router.replace({ path: '/' })
+            const router = useRouter()
+            this.$router.replace({ path: '/' })
+        }
     },
     methods: {
         loaded() {

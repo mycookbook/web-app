@@ -124,29 +124,10 @@ export default {
     name: "LeftSideMenu",
     computed: {
         my_recipes() {
-            if (this.$store.state.hasOwnProperty('active_user')) {
-                const recipes = this.$store.state.active_user.recipes
-                console.log('my recipes', this.$store.state)
-                if (recipes) {
-                    return recipes.filter(function (recipe) {
-                        return recipe.is_draft == false;
-                    })
-                }
-            } else {
-                return []
-            }
+            return []
         },
         my_drafts() {
-            if (this.$store.state.hasOwnProperty('active_user')) {
-                const recipes = this.$store.state.active_user.recipes
-                if (recipes) {
-                    return recipes.filter(function (recipe) {
-                        return recipe.is_draft == true;
-                    })
-                }
-            } else {
-                return []
-            }
+            return []
         }
     },
 };

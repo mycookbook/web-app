@@ -63,7 +63,7 @@ export default defineNuxtComponent({
       return this.$store.state.resource_isLoading
     },
     errors() {
-      return this.$store.state.form-errors.contact_form
+      return this.$store.state.form_errors.contact_form
     },
     success() {
       return this.$store.state.subscriptionStore.success
