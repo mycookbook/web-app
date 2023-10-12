@@ -48,7 +48,7 @@
             <div class="ui grid container">
                 <div class="ui fourteen wide mobile column">
                     <a href="/">
-                        <img src="transparent_logo.png" class="ui centered image" alt="cookbookinc brand logo"
+                        <img src="~/assets/img/transparent_logo.png" class="ui centered image" alt="cookbookinc brand logo"
                             style="margin-top:-6%!important;margin-left:16%!important;">
                     </a>
                 </div>
