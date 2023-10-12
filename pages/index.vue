@@ -29,7 +29,6 @@
 
 <script lang="ts">
 export default defineNuxtComponent({
-    name: 'index',
     computed: {
         userIsLoggedIn() {
             return this.$store.state.access_token
@@ -45,6 +44,9 @@ export default defineNuxtComponent({
             this.$store.dispatch('set_active_user', { code, _d })
             this.$store.dispatch('fetch_active_user', _d)
         }
+
+        const router = useRouter()
+        this.$router.replace({ path: '/' })
     },
     methods: {
         loaded() {
