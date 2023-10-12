@@ -131,7 +131,7 @@ export const store = createStore({
             state.access_token = accessToken
             state.username = userName
             state.active_user = {
-                recipes: activeUser.recipes
+                recipes: []
             }
         },
         LOGOUT(state) {

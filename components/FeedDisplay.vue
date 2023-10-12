@@ -2,28 +2,75 @@
     <div class="ui container">
         <Navigation />
         <div class="ui grid">
-            <div class="sixteen wide computer column sixteen wide mobile column">
+            <div
+                class="sixteen wide computer column sixteen wide mobile column"
+            >
                 <div class="ui grid">
-                    <div class="three wide computer column sixteen wide mobile hidden column">
+                    <div
+                        class="three wide computer column sixteen wide mobile hidden column"
+                    >
                         <LeftSideMenu />
                     </div>
-                    <div class="eight wide computer column sixteen wide mobile column">
-                        <a class="ui label">
-                            <em>Control what you see by
-                                <NuxtLink href="/#/dashboard?tab=Preferences">choosing </NuxtLink>your preffered topics
-                            </em>
-                        </a>
-                        <br /><br />
-                        <FeedData />
-                    </div>
-                    <div class="five wide computer column sixteen wide mobile column">
-                        <div class="ui grid">
-                            <ThreehundredByTwofifty />
+                    <div
+                        class="eight wide computer column sixteen wide mobile column"
+                    >
+                        <div class="ui header">
+                            <a
+                                class="black-text"
+                                href="/#/?v=fu"
+                                id="foryou"
+                                @click="setCurrentTab('fu')"
+                                :class="{
+                                    active:
+                                        currentTab === 'fu' ||
+                                        currentTab === undefined,
+                                }"
+                            >
+                                For You
+                                <a
+                                    class="ui red circular basic tiny label"
+                                    style="padding: 7px 8px !important"
+                                >
+                                    Beta
+                                </a>
+                            </a>
+                            <a class="" style="padding-right: 30px"></a>
+                            <a
+                                class="black-text"
+                                href="/#/?v=ff"
+                                id="following"
+                                @click="setCurrentTab('ff')"
+                                :class="{ active: currentTab === 'ff' }"
+                            >
+                                Following
+                            </a>
                         </div>
+                        <div style="color: white !important" id="currTab">
+                            {{ currentTab }}
+                        </div>
+                        <div
+                            v-if="
+                                currentTab === 'fu' || currentTab === undefined
+                            "
+                        >
+                            <ForYou />
+                        </div>
+                        <div v-else>
+                            <Following />
+                        </div>
+                    </div>
+                    <div
+                        class="five wide computer column sixteen wide mobile column"
+                    >
                         <div class="ui grid">
-                            <div class="sixteen wide computer column sixteen wide mobile column">
+                            <div
+                                class="sixteen wide computer column sixteen wide mobile column"
+                            >
                                 <WhoToFollowList />
                             </div>
+                        </div>
+                        <div class="ui grid mobile hidden">
+                            <ThreehundredByTwofifty />
                         </div>
                     </div>
                 </div>
@@ -31,8 +78,40 @@
         </div>
     </div>
 </template>
+
+<script lang="ts">
+
+export default {
+    name: "Feed",
+    computed: {
+        currentTab() {
+            return this.$route.query.v;
+        },
+    },
+    data() {
+        return {
+            selected: this.$route.query.v,
+        };
+    },
+    methods: {
+        setCurrentTab(tab) {
+            this.currentTab = tab;
+        },
+    },
+};
+</script>
+
 <style scoped>
 .container {
     margin-top: 23vh;
+}
+
+.active {
+    padding: 20px 10px;
+    border-bottom: solid #0160cc 1px;
+}
+
+.black-text {
+    color: black !important;
 }
 </style>
