@@ -41,10 +41,12 @@
 .contents {
   margin-top: 25vh !important;
 }
+
 .title {
   font-size: 25px;
   font-weight: 300 !important;
 }
+
 .content {
   font-weight: 300 !important;
   padding-right: 45px;

@@ -42,12 +42,15 @@
 .margin-top-15 {
   margin-top: 15px;
 }
+
 .margin-top-150 {
   margin-top: 158px;
 }
+
 .checkboxes .checkbox {
   margin: 10px;
 }
+
 .capitalize {
   text-transform: capitalize !important;
 }

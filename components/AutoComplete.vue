@@ -1,7 +1,7 @@
 <template>
     <div class="ui massive search search-container">
         <div class="ui icon large fluid input">
-            <input id="searchInput" v-model="query" type="text" placeholder='Try "banana bread recipe"' class="prompt"
+            <input id="search-input" v-model="query" type="text" placeholder='Try "banana bread recipe"' class="prompt"
                 @keyup="search" />
             <i class="search icon sicon"></i>
         </div>
@@ -11,7 +11,7 @@
                     <small>
                         no results.
                         <em>
-                            Know how to prepare <span id="qStr">{{ qStr }}</span>? <a href="/register">Add it</a>
+                            Know how to prepare <span id="q-str">{{ q-str }}</span>? <a href="/register">Add it</a>
                         </em>
                     </small>
                     <hr />
@@ -57,7 +57,7 @@
                     </a>
                 </div>
                 <div class="fluid ui button">
-                    <NuxtLink :to="`/search?q=${qStr}`"> View all </NuxtLink>
+                    <NuxtLink :to="`/search?q=${q-str}`"> View all </NuxtLink>
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@ export default defineNuxtComponent({
     data() {
         return {
             searching: false,
-            qStr: '',
+            q-str: '',
             results: [],
             query: '',
         }
@@ -92,7 +92,7 @@ export default defineNuxtComponent({
                 }
 
                 this.results = []
-                this.qStr = this.query
+                this.q-str = this.query
 
                 try {
                     const response = await makeRequest('search', {
@@ -110,7 +110,7 @@ export default defineNuxtComponent({
                 } catch (error) {
                     console.error('search error', error.response.data)
                 }
-                this.searching = this.qStr
+                this.searching = this.q-str
             }
         },
         getClass(type) {
@@ -156,7 +156,7 @@ export default defineNuxtComponent({
     border-top: none !important;
     border-left: none !important;
     border-right: none !important;
-    background-color: #ffffff !important;
+    background-color: #fff !important;
 }
 
 .search-container {
@@ -172,7 +172,7 @@ export default defineNuxtComponent({
     font-weight: bold;
 }
 
-#qStr {
+#q-str {
     background-color: yellow !important;
 }
 
@@ -180,9 +180,9 @@ export default defineNuxtComponent({
     text-transform: capitalize;
 }
 
-#searchInput::placeholder {
+#search-input::placeholder {
     font-size: 0.8em;
-    color: #eeeeee;
+    color: #eee;
     font-style: italic;
 }
 </style>

@@ -16,7 +16,7 @@
         </div>
         <div class="ui grid">
             <div class="three wide computer column sixteen wide mobile column sixteen wide tablet column"
-                style="border-right: solid #eeeeee 1px">
+                style="border-right: solid #eee 1px">
                 <p class="ui info message">
                     Results are ranked based on relevance and the activities of users in
                     your geographical location
@@ -126,7 +126,7 @@
                             <small>
                                 <span v-if="result.contains && result.contains.length > 0">
                                     includes
-                                    <span style="background-color: #ffff00" v-for="contain in result.contains"
+                                    <span style="background-color: #ff0" v-for="contain in result.contains"
                                         :key="contain">
                                         {{ contain }}
                                     </span>

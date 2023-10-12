@@ -6,6 +6,6 @@
 
 <style scoped>
 .example-class {
-  color: #000000;
+  color: #000;
 }
 </style>

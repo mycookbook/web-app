@@ -18,7 +18,7 @@
                             <div class="ui button tbb tablet hidden" @click="logOut()" id="logoutBtn">
                                 Logout
                             </div>
-                            <div class="ui button tbb tablet hidden" id="dashboardBtn">
+                            <div class="ui button tbb tablet hidden" id="dashboard-btn">
                                 <NuxtLink :to="{ path: '/dashboard', query: { tab: 'Recipes' } }" title="Navigate to my dashboard"> 
                                     My Dashboard
                                 </NuxtLink>
@@ -83,7 +83,7 @@ body {
     margin-left: 25px !important;
 }
 
-#dashboardBtn > a{
+#dashboard-btn > a{
     color: white!important;
 }
 </style>

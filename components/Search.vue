@@ -27,16 +27,19 @@
 .biro-blue {
   color: #0160cc !important;
 }
+
 .discover {
   font-size: 60px;
   font-weight: 900;
   line-height: 1.1em !important;
 }
+
 .food-drink {
   font-weight: 300;
-  padding: 0 0 65px 0;
+  padding: 0 0 65px;
   font-size: calc(30px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
+
 .search-banner {
   margin-top: 25vh !important;
 }
