@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div style="background-color: rgb(244, 244, 244); padding:15px!important;">
+        <div style="background-color: rgb(244 244 244); padding:15px!important;">
             <div class="ui items">
                 <div class="item">
                     <div class="content">

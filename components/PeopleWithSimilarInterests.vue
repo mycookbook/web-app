@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div style="background-color: rgb(244, 244, 244); padding:15px!important;">
+        <div style="background-color: rgb(244 244 244); padding:15px!important;">
             <div class="ui centered header">We thought you might like the following recipes</div>
             <div>
                 <div class="ui small centered images" style="margin-left:5%!important;">
