@@ -88,5 +88,3 @@ export default defineNuxtComponent({
   },
 })
 </script>
-
-<style scoped></style>

@@ -42,9 +42,10 @@ export default defineNuxtComponent({
 .contributor-avatar {
   height: 32px !important;
 }
+
 .count {
   font-size: 0.89em !important;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgb(0 0 0 / 50%);
   padding-bottom: 15px;
 }
 </style>

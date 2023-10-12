@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="cookbookEditor">
+        <div class="cookbook-editor">
             <div style="text-align: center">
                 <div>
                     {{ description }}
@@ -72,7 +72,7 @@ export default defineNuxtComponent({
 </script>
 
 <style scoped>
-.cookbookEditor {
+.cookbook-editor {
     border: 1px dashed blue;
     height: 170px;
     align-items: center;

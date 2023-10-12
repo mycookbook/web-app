@@ -108,7 +108,7 @@
     <div>
       <div
         class="ui container"
-        style="margin-top: 6vh; border-top: 1px solid #cccccc"
+        style="margin-top: 6vh; border-top: 1px solid #ccc"
       >
         <div class="ui grid">
           <div class="ui ten wide computer column sixteen wide mobile column">

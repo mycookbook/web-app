@@ -8,7 +8,7 @@
                     </a>
                 </div>
             </div>
-            <div class="ten wide right floated tablet column ten wide computer right floated column tvn no padding">
+            <div class="ten wide tablet column ten wide computer column">
                 <div class="selectors">
                     <div class="ui secondary menu">
                         <NuxtLink to="marketplace" class="item" title="Marketplace coming soon" id="marketplaceNavBtn">
@@ -18,21 +18,21 @@
                             <div class="ui button tbb tablet hidden" @click="logOut()" id="logoutBtn">
                                 Logout
                             </div>
-                            <div class="ui button tbb tablet hidden" id="dashboardBtn">
-                                <NuxtLink :to="{ path: '/dashboard', query: { tab: 'Recipes' } }" title="Navigate to my dashboard"> 
+                            <div class="ui button tbb tablet hidden" id="dashboard-btn">
+                                <NuxtLink :to="{ path: '/dashboard', query: { tab: 'Recipes' } }"
+                                    title="Navigate to my dashboard">
                                     My Dashboard
                                 </NuxtLink>
                             </div>
                         </div>
                         <div v-else>
                             <NuxtLink to="/signin" class="ui button tbb tablet hidden" id="signinBtn">
-                                Sign  in
+                                Sign in
                             </NuxtLink>
                             <NuxtLink to="" class="ui button tbb tablet only" id="signinBtn">
-                                Sign  in
+                                Sign in
                             </NuxtLink>
                         </div>
-                        <a class="item"></a>
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@ body {
     margin-left: 25px !important;
 }
 
-#dashboardBtn > a{
-    color: white!important;
+#dashboard-btn>a {
+    color: white !important;
 }
 </style>

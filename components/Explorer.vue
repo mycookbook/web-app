@@ -92,17 +92,20 @@ export default defineNuxtComponent({
   background-color: #fcfcfc !important;
   padding: 4% !important;
 }
+
 .categories-quick-search-wrapper p {
-  color: #999999 !important;
+  color: #999 !important;
   font-weight: 300;
 }
+
 .flex-container {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
+
 .categories-quick-search-wrapper h3 {
-  margin-top: 0px !important;
+  margin-top: 0 !important;
   margin-bottom: 30px !important;
   font-size: 22px !important;
   line-height: 26px !important;

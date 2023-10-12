@@ -31,7 +31,7 @@ export default defineNuxtComponent({
 
 <style scoped>
 .title a {
-  color: #dddddd;
+  color: #ddd;
   text-decoration: underline;
 }
 
