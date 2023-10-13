@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="ui list">
-            <div class="item" style="background-color: rgb(244, 244, 244); padding:15px!important;">
+            <div class="item" style="background-color: rgb(244 244 244); padding:15px!important;">
                 <div>
                     <i class="yellow star icon"></i>
                     <i class="yellow star icon"></i>
