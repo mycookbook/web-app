@@ -79,8 +79,8 @@
 				</div>
 			</div>
 		</div>
-		<Contact />
-		<Bottom />
+		<ContactForm />
+		<BottomNav />
 	</div>
 </template>
 
