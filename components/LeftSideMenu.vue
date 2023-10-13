@@ -124,10 +124,16 @@ export default {
     name: "LeftSideMenu",
     computed: {
         my_recipes() {
-            return []
+            const recipes = this.$store.state.contributor?.recipes || []
+            return recipes.filter(function (recipe) {
+                return recipe.is_draft === false
+            })
         },
         my_drafts() {
-            return []
+            const recipes = this.$store.state.contributor?.recipes || []
+            return recipes.filter(function (recipe) {
+                return recipe.is_draft === true
+            })
         }
     },
 };

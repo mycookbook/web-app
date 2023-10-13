@@ -87,7 +87,7 @@ export const store = createStore({
             if (userDetails.data) {
                 context.commit('SET_ACTIVE_USER', {
                     accessToken: payload.code,
-                    userName: payload.username,
+                    userName: payload._d,
                     active_user: userDetails.data.data.user[0]
                 })
 
@@ -100,6 +100,21 @@ export const store = createStore({
             context.commit('LOGOUT')
 
             router.push({ path: '/' })
+        },
+        async fetch_contributor(context, username) {
+            context.commit('SET_LOADING_STATE', true)
+            try {
+                const response = await makeRequest(`users/${username}`)
+
+                context.commit('UPDATE_CONTRIBUTOR_OBJECT', response.data)
+                context.commit('SET_LOADING_STATE', false)
+            } catch (error) {
+                console.error('fetch contributor error', error.response)
+            }
+        },
+        reset_msgs(context: { commit: (arg0: string, arg1: boolean | undefined) => void; }) {
+            context.commit('SET_LOADING_STATE', false)
+            context.commit('RESET_MSGS', false)
         },
     },
     getters: {
@@ -127,7 +142,7 @@ export const store = createStore({
             this.state.resource_isLoading = status
         },
         SET_ACTIVE_USER(state, { accessToken, userName, activeUser }) {
-            console.log('au', activeUser)
+            console.log('username', activeUser)
             state.access_token = accessToken
             state.username = userName
             state.active_user = {
@@ -138,6 +153,13 @@ export const store = createStore({
             state.access_token = null;
             state.active_user = {};
             state.following_data = {};
+        },
+        UPDATE_CONTRIBUTOR_OBJECT(state, newState) {
+            state.contributor = newState.data.user[0]
+        },
+        RESET_MSGS(state: { upload_error: null; imagePath: string; }) {
+            state.upload_error = null
+            state.imagePath = ''
         },
     },
     modules: {

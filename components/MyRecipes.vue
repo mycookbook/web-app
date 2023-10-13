@@ -2,15 +2,15 @@
     <div>
         <div class="hideshowicon">
             <div v-if="inEditMode">
-                hide editor<i class="ui chevron down icon" @click="toggleEditor('hide')"></i>
+                show editor<i class="ui chevron up icon" @click="toggleEditor('show')"></i>
             </div>
             <div v-else>
-                show editor<i class="ui chevron up icon" @click="toggleEditor('show')"></i>
+                hide editor<i class="ui chevron down icon" @click="toggleEditor('hide')"></i>
             </div>
         </div>
         <br />
 
-        <div id="recipe-editor">
+        <div id="recipe-editor" class="hide">
             <div class="ui segment">
                 <UploadImage :description="uploadMessageDescription" :image-dimension-msg="imageDimensionMsg"
                     :accept-types="acceptTypes" />
@@ -47,15 +47,11 @@
                     <label>
                         <span> How to prepare (required*) </span>
                         <span style="float: right !important">
-                            <a href="/#/help?doc=templates"> see templates </a>
+                            <a href="/help/templates"> see templates </a>
                         </span>
                     </label>
-                    <!-- <vue-editor
-            v-model="recipeDescription"
-            :editorOptions="editorSettings"
-            :editorToolbar="customToolbar"
-            placeholder="A very good description will be several characters long. A well detailed recipe keeps your followers engaged and keep coming back for more. Not sure how to start? Check out our sample templates."
-          /> -->
+                    <VueEditor v-model="recipeDescription" :editorOptions="editorSettings" :editorToolbar="customToolbar"
+                        placeholder="A very good description will be several characters long. A well detailed recipe keeps your followers engaged and keep coming back for more. Not sure how to start? Check out our sample templates." />
                 </div>
             </div>
             <br />
@@ -160,7 +156,7 @@
                                 </small>
                             </a>
                             <span style="float: right !important; font-size: 16px">
-                                <NuxtLink :to="`/recipes/${recipe.slug}`"> edit </NuxtLink>
+                                <NuxtLink :to="`/recipes/${recipe.slug}/edit`"> edit </NuxtLink>
                             </span>
                             <div class="meta">
                                 <span>
@@ -178,14 +174,12 @@
 <script lang="ts">
 export default defineNuxtComponent({
     mounted() {
-        // const username = this.$store.state.username
-        // this.$store.dispatch('fetch_contributor', username)
-        // this.$store.dispatch('reset_msgs')
+        this.$store.dispatch('fetch_contributor', this.$store.state.username);
+        this.$store.dispatch('reset_msgs')
     },
     computed: {
         _categories() {
-            const contents =
-                this.$store.state.cookbookStore.definitions.categories.contents
+            const contents = this.$store.state.cookbookStore.definitions.categories.contents
             return JSON.parse(contents)
         },
         _myRecipes() {
@@ -254,10 +248,11 @@ export default defineNuxtComponent({
 </script>
 
 <style scoped>
-/* @import '~vue2-editor/dist/vue2-editor.css';
-@import '~quill/dist/quill.core.css';
-@import '~quill/dist/quill.bubble.css';
-@import '~quill/dist/quill.snow.css'; */
+@import url("vue2-editor/dist/vue2-editor.css");
+@import url("quill/dist/quill.core.css");
+@import url("quill/dist/quill.bubble.css");
+
+@import url("quill/dist/quill.snow.css");
 
 .hideshowicon i {
     cursor: pointer !important;

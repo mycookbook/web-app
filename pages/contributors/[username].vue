@@ -83,7 +83,7 @@
 <script lang="ts">
 export default defineNuxtComponent({
   mounted() {
-    this.$store.dispatch('fetch_contributor', this.$route.params.username)
+    // this.$store.dispatch('fetch_contributor', this.$route.params.username)
   },
   computed: {
     contributor() {

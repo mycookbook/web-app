@@ -74,4 +74,8 @@ export default defineNuxtConfig({
     },
   },
   css: ['@/assets/css/style.css'],
+  dir: {
+    modules: ["vue2-editor/nuxt"]
+  }
+//   modules: ["vue2-editor/nuxt"]
 })
