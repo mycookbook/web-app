@@ -12,7 +12,7 @@
                 <div class="selectors">
                     <div class="ui secondary menu">
                         <NuxtLink to="marketplace" class="item" title="Marketplace coming soon" id="marketplaceNavBtn">
-                            <i class="blue usd icon"></i> Go to Marketplace
+                            <i class="blue cart icon"></i> Go to Marketplace
                         </NuxtLink>
                         <div v-if="isLoggedIn">
                             <div class="ui button tbb tablet hidden" @click="logOut()" id="logoutBtn">
