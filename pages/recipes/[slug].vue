@@ -5,84 +5,11 @@
             <SkeletonRecipeCard />
         </div>
         <div v-else>
-            <br /><br /><br />
-            <Breadcrumb :active="recipe?.cookbook?.name" :path="`/cookbooks/${recipe?.cookbook?.slug}`"
-                :child="recipe?.name" />
-            <div class="ui grid">
-                <div class="sixteen wide computer column sixteen wide mobile column">
-                    <div class="ui grid" style="
-              border: 1px solid rgb(255, 255, 255);
-              border-radius: 15px !important;
-              background-color: rgb(255, 255, 255);
-            ">
-                        <div class="eight wide computer column sixteen wide mobile column ui fluid image"
-                            style="height: fit-content !important">
-                            <div class="ui mini images">
-                                <img v-for="ingredient in recipe?.ingredients?.data" :key="ingredient.name" class="ui image"
-                                    :src="ingredient.thumbnail" :alt="ingredient.name"
-                                    :title="ingredient.unit + ' ' + ingredient.name" style="cursor: zoom-in"
-                                    @click="ingredientLink(ingredient)"
-                                    :style="{ display: 'inline-flex', height: '35px' }" />
-                            </div>
-                            <img :src="recipe?.imgUrl" :alt="recipe?.name" class="zoom" />
-                            <div class="talkify-section">
-                                <div class="ui header padded">
-                                    <span> HOW TO PREPARE </span>
-                                    <span style="float: right; cursor: pointer !important" @click="textToSpeech()">
-                                        <button class="ui right labeled icon tbb button">
-                                            <i class="right icon headphone"></i>
-                                            Listen
-                                        </button>
-                                        <span style="
-                        font-size: 14px;
-                        margin-left: -5px;
-                        font-weight: lighter;
-                      "></span>
-                                    </span>
-                                </div>
-                                <div v-html="recipe?.description" class="ui left aligned text"></div>
-                            </div>
-                        </div>
-                        <div class="eight wide computer column sixteen wide mobile column">
-                            <div class="ui grid">
-                                <div class="sixteen wide computer column sixteen wide mobile column">
-                                    <Follow v-if="recipe?.author" :followers="recipe?.author?.followers"
-                                        :author="recipe?.author?.name" :avatar="recipe?.author?.avatar"
-                                        :handle="recipe?.author?.name_slug" />
-                                </div>
-                            </div>
-                            <div class="ui horizontal divider"></div>
-                            <div class="ui grid">
-                                <div class="four wide computer column sixteen wide mobile column">
-                                    <Claps />
-                                </div>
-                                <div class="four wide computer column sixteen wide mobile column">
-                                    <div class="ui tbb fluid mini circular button" :class="{ disabled: !_isLoggedIn }"
-                                        title="Add a variation for this recipe, make it yours!">
-                                        <i class="ui plus icon"></i>
-                                        Customize
-                                    </div>
-                                </div>
-                                <div class="four wide computer column sixteen wide mobile column">
-                                    <div class="ui icon tbb fluid mini circular button" data-tooltip="Click to copy"
-                                        data-position="top left" data-inverted="" id="clipboardMsg"
-                                        @click="copyIngredients()">
-                                        <i class="ui linkify icon"></i>
-                                        Copy ingredients
-                                    </div>
-                                </div>
-                                <div class="four wide computer column sixteen wide mobile column">
-                                    <ReportIt />
-                                </div>
-                            </div>
-                            <div class="ui grid">
-                                <div class="sixteen wide computer column sixteen wide mobile column">
-                                    <Comments v-if="_recipeComments" :comments="_recipeComments" :author_id="recipe?.id" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div v-if="inEditMode">
+                <EditRecipe :imagePath="recipe.imgUrl" :recipe="recipe" />
+            </div>
+            <div v-else>
+                <ShowRecipe :recipe="recipe" :recipeComments="_recipeComments" :ingredients="ingredientsList(recipe)" />
             </div>
         </div>
         <ContactForm />
@@ -93,13 +20,12 @@
 <script lang="ts">
 export default defineNuxtComponent({
     mounted() {
-        window.scrollTo(0, 0)
         this.$store.dispatch('fetch_recipe', this.$route.params.slug)
     },
     props: ['slug', 'id'],
     computed: {
         recipe() {
-            return this.$store.state.recipe || {}
+            return this.$store.state.recipe?.data || {}
         },
         isLoading() {
             return this.$store.state.resource_isLoading
@@ -117,6 +43,9 @@ export default defineNuxtComponent({
 
             return this.isLoggedIn
         },
+        inEditMode() {
+            return this.$route.query.mode == 'edit'
+        }
     },
     data() {
         return {
@@ -171,7 +100,7 @@ export default defineNuxtComponent({
 
             playlist.play()
         },
-        ingredientLink(ingredient) {
+        ingredientLink(ingredient: { link: string; name: string; purchaseLink: string }) {
             let url = ''
             if (!ingredient.link) {
                 const googleSearchUrl =
@@ -188,6 +117,13 @@ export default defineNuxtComponent({
 
             window.open(url, '_blank').focus()
         },
+        ingredientsList(recipe: { ingredients: string }) {
+            try {
+                return JSON.parse(recipe.ingredients).data
+            } catch (e) {
+                return [];
+            }
+        }
     },
 })
 </script>
@@ -195,31 +131,5 @@ export default defineNuxtComponent({
 <style scoped>
 .container {
     margin-top: 23vh;
-}
-
-.img-container .button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-}
-
-.padded {
-    padding-top: 30px;
-    padding-bottom: 5px;
-}
-
-.hidden {
-    display: none !important;
-}
-
-.show {
-    display: block !important;
-}
-
-.shareIcons span {
-    margin-right: 12% !important;
-    cursor: pointer !important;
 }
 </style>
