@@ -11,7 +11,7 @@
                     <small>
                         no results.
                         <em>
-                            Know how to prepare <span id="q-str">{{ qStr }}</span>? <a href="/register">Add it</a>
+                            Know how to prepare <span id="q-str">{{ qStr }}</span>? <a href="/signin">Add it</a>
                         </em>
                     </small>
                     <hr />
@@ -57,7 +57,7 @@
                     </a>
                 </div>
                 <div class="fluid ui button">
-                    <NuxtLink :to="`/search?q=${q-str}`"> View all </NuxtLink>
+                    <NuxtLink :to="`/search?q=${q - str}`"> View all </NuxtLink>
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@ export default defineNuxtComponent({
             if (this.query.length > 3) {
                 if (e.which === 13) {
                     //   this.$store.dispatch('post_to_ml_endpoint', this.query)
-                    this.$router.replace({ name: 'search', query: {'q': this.query}})
+                    this.$router.replace({ name: 'search', query: { 'q': this.query } })
                 }
 
                 this.results = []

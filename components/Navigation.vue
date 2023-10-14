@@ -10,8 +10,16 @@
             </div>
             <div class="ten wide tablet column ten wide computer column">
                 <div class="selectors">
+                    <div class="ui secondary menu" style="margin-right: 50px;" v-if="routeName != 'search'">
+                        <div class="ui search">
+                            <div class="ui icon input">
+                                <input class="ui circular prompt" type="text" placeholder="Type to search ..."
+                                    @keyup="searchForQuery" v-model="globQ">
+                                <i class="search icon"></i>
+                            </div>
+                        </div>
+                    </div>
                     <div class="ui secondary menu">
-                        
                         <div>
                             <div class="ui button tbb white-text">
                                 <NuxtLink :to="{ path: '/stores-locator' }" title="Navigate to my dashboard">
@@ -52,10 +60,24 @@ export default {
         isLoggedIn() {
             return (this.$store.state.access_token);
         },
+        routeName() {
+            return this.$route.name
+        }
+    },
+    data() {
+        return {
+            globQ: ''
+        }
     },
     methods: {
         logOut: function () {
             this.$store.dispatch('logout')
+        },
+        searchForQuery(e) {
+            if (e.which === 13) {
+                const router = useRouter()
+                router.replace({ name: "search", query: { 'q': this.globQ } })
+            }
         }
     }
 };
