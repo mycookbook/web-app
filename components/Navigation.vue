@@ -11,15 +11,16 @@
             <div class="ten wide tablet column ten wide computer column">
                 <div class="selectors">
                     <div class="ui secondary menu">
+                        
                         <div>
-                            <div class="ui disabled button tbb white-text">
-                                <NuxtLink :to="{ path: '/shopping-cart' }" title="Navigate to my dashboard">
-                                    <i class="ui white cart icon"></i>Cart (0)
+                            <div class="ui button tbb white-text">
+                                <NuxtLink :to="{ path: '/stores-locator' }" title="Navigate to my dashboard">
+                                    <i class="ui point icon"></i>Stores Locator
                                 </NuxtLink>
                             </div>
                         </div>
                         <div v-if="isLoggedIn">
-                            <div class="ui button tbb tablet hidden" @click="logOut()" id="logoutBtn">
+                            <div class="ui tbb button" @click="logOut()">
                                 Logout
                             </div>
                             <div class="ui button tbb tablet hidden" id="dashboard-btn">
