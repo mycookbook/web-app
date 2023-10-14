@@ -11,19 +11,19 @@
                             <img class="ui large fluid image" src="~/assets/img/omg-what-is-that.jpg" />
                         </div>
                         <div class="eight wide computer column">
-                            <h1 class="ui header">
+                            <h1 class="ui header capitalize">
                                 {{ showing }}???
-                                <div class="sub header">OMFG what is that!!! &#128513;</div>
+                                <div class="sub header">OMFG what is that recipe!!! &#128513;</div>
                             </h1>
                             <h2 class="ui header">
-                                We don't know what it is ...
+                                We don't know that recipe ...
                                 <div class="sub header">
-                                    Do you know what it is???
+                                    Do you know the recipe???
                                 </div>
                             </h2>
                             <br /><br />
                             <div>
-                                Everyday, creators like you use this platform to showcase their creativity. It is
+                                Everyday, content creators like you use this platform to showcase their creativity. It is
                                 an opportunity to be a part of something meaninful and fun. All you need to do is
                                 signin with your TikTok account and that's it! Start creating recipes.
                             </div>
@@ -73,3 +73,9 @@ export default defineNuxtComponent({
     }
 })
 </script>
+
+<style scoped>
+.capitalize{
+    text-transform: capitalize;
+}
+</style>

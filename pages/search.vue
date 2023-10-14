@@ -198,9 +198,9 @@ export default defineNuxtComponent({
             searchKeyType: 3,
             excludeKeywords: [
                 ':tags',
-                ':tags',
                 ':cookbooks',
-                ':recipes'
+                ':recipes',
+                ':me'
             ]
         }
     },
