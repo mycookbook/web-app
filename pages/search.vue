@@ -150,7 +150,18 @@
                     <div>
                         <a class="link">
                             <div @click="redirectTo(result.resource_type, result.slug)">
-                                <h4>{{ result.name }}</h4>
+                                <h4>
+                                    <div v-if="result.resource_type == 'recipe'">
+                                        {{ result.name }}
+                                        <a class="ui circular label">
+                                            <i class="red like icon"></i> {{ result.claps }} likes
+                                        </a>
+                                    </div>
+                                    <div v-else>
+                                        {{ result.name }}
+                                    </div>
+
+                                </h4>
                             </div>
                         </a>
                     </div>
