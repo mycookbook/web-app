@@ -75,7 +75,7 @@ export default defineNuxtComponent({
 </script>
 
 <style scoped>
-.capitalize{
+.capitalize {
     text-transform: capitalize;
 }
 </style>
