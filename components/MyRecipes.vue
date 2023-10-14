@@ -156,7 +156,7 @@
                                 </small>
                             </a>
                             <span style="float: right !important; font-size: 16px">
-                                <NuxtLink :to="`/recipes/${recipe.slug}/edit`"> edit </NuxtLink>
+                                <NuxtLink :to="`/recipes/${recipe.slug}?mode=edit`"> edit </NuxtLink>
                             </span>
                             <div class="meta">
                                 <span>
