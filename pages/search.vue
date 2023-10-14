@@ -7,6 +7,14 @@
                 <h2>Trending this week</h2>
             </div>
             <div class="thirteen wide computer column sixteen wide mobile column sixteen wide tablet column">
+                <div
+                    v-if="searchq != '' && results.length == 0 && searchKeyType == 3 && !queryStartsWith(searchq) && !keepShowing()">
+                    <NoResultsModal :showing="showing" />
+                    {{ unhideModal() }}
+                </div>
+                <div v-else>
+                    {{ hideModal() }}
+                </div>
                 <div class="ui huge header">
                     Showing {{ results.length }} of {{ results.length }} results for "{{
                         showing
@@ -126,8 +134,7 @@
                             <small>
                                 <span v-if="result.contains && result.contains.length > 0">
                                     includes
-                                    <span style="background-color: #ff0" v-for="contain in result.contains"
-                                        :key="contain">
+                                    <span style="background-color: #ff0" v-for="contain in result.contains" :key="contain">
                                         {{ contain }}
                                     </span>
                                 </span>
@@ -183,37 +190,47 @@ export default defineNuxtComponent({
 
                 return this.$route.query.q
             }
-        },
+        }
     },
     data() {
         return {
             searchq: '',
+            searchKeyType: 3,
+            excludeKeywords: [
+                ':tags',
+                ':tags',
+                ':cookbooks',
+                ':recipes'
+            ]
         }
     },
     methods: {
-        isCookbook(type) {
+        isCookbook(type: string) {
             return type === 'cookbook'
         },
-        isRecipe(type) {
+        isRecipe(type: string) {
             return type === 'recipe'
         },
-        getTo(name) {
+        getTo(name: string) {
             return '/contributors/' + name
         },
-        searchForQuery(e) {
+        searchForQuery(e: { which: number }) {
             if (e.which === 13) {
                 const qStr = $('#sq').val()
                 this.$router.replace(`/search?q=${qStr}`)
                 this.searchq = qStr
+            } else {
+                this.searchKeyType = e.which
             }
+
 
             this.$store.dispatch('empty_results_object')
             this.$store.dispatch('fetch_results', this.searchq)
         },
-        redirectTo(type, slug) {
+        redirectTo(type: any, slug: any) {
             this.$router.replace(`/${type}s/${slug}`)
         },
-        sortBy(order) {
+        sortBy(order: string) {
             this.$store.dispatch('sort_results_by', order)
         },
         initkeywords() {
@@ -221,6 +238,22 @@ export default defineNuxtComponent({
             $('#example2').progress()
             $('#example3').progress()
         },
+        unhideModal() {
+            $('.ui.modal').modal('show')
+        },
+        hideModal() {
+            $('.ui.modal').modal('hide')
+        },
+        queryStartsWith(q: any) {
+            const matches = this.excludeKeywords.filter(function (k) {
+                return q.startsWith(k)
+            })
+
+            return matches.length > 0
+        },
+        keepShowing() {
+            return localStorage.getItem('keepShowing') == 'no'
+        }
     },
 })
 </script>

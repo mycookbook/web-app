@@ -105,12 +105,12 @@ export default defineNuxtComponent({
                     })
                     if (Object.keys(this.results).length === 0) {
                         this.results = response.data.response
-                        this.$store.dispatch('post_to_ml_endpoint', this.query)
+                        // this.$store.dispatch('post_to_ml_endpoint', this.query)
                     }
                 } catch (error) {
                     console.error('search error', error.response.data)
                 }
-                this.searching = this.q-str
+                this.searching = this.qStr
             }
         },
         getClass(type) {

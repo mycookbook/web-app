@@ -3,7 +3,7 @@
         <div class="ui list">
             <div class="item">
                 <div class="content">
-                    <NuxtLink to="/search">
+                    <NuxtLink to="/search?q=:recipes|likes 0">
                         <div>
                             <small><i class="ui search icon"></i>Advanced Search</small>
                         </div>
