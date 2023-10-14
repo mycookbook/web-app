@@ -6,7 +6,7 @@
         </div>
         <div v-else>
             <div v-if="inEditMode">
-                <EditRecipe :imagePath="recipe.imgUrl" :recipe="recipe" />
+                <EditRecipe />
             </div>
             <div v-else>
                 <ShowRecipe :recipe="recipe" :recipeComments="_recipeComments" :ingredients="ingredientsList(recipe)" />

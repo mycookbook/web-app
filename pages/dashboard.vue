@@ -19,9 +19,6 @@
 								<div v-if="activeLink === 'Drafts'">
 									<MyDrafts />
 								</div>
-								<div v-if="activeLink === 'EditRecipe' && recipeId">
-									<EditRecipe :recipeId="recipeId" />
-								</div>
 								<div v-if="activeLink === 'Preferences'">
 									<Preferences />
 								</div>
