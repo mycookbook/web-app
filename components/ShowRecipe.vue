@@ -50,14 +50,13 @@
                         </div>
                         <div class="ui horizontal divider"></div>
                         <div class="ui grid">
-                            <div class="four wide computer column sixteen wide mobile column">
+                            <div class="six wide computer column sixteen wide mobile column">
                                 <Claps />
                             </div>
-                            <div class="six wide computer column sixteen wide mobile column">
-                                <div class="ui tbb fluid button" data-tooltip="Click to copy" data-position="top left"
+                            <div class="four wide computer column sixteen wide mobile column">
+                                <div class="ui tbb fluid button" data-tooltip="Click to copy ingredients to your clipboard" data-position="top left"
                                     data-inverted="" id="clipboardMsg" @click="copyIngredients()">
-                                    <i class="ui linkify icon"></i>
-                                    Copy ingredients
+                                    ingredients
                                 </div>
                             </div>
                             <div class="six wide computer column sixteen wide mobile column">

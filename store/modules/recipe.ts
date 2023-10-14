@@ -2,12 +2,13 @@ import { makeRequest } from '~~/utils/makeRequest'
 
 const state = () => ({
     recipe: {},
+    totalCount: 0,
     hasClapped: 0,
     maxAllowedClaps: 10,
 })
 const mutations = {
     INCREMENT_CLAP(state, claps) {
-        this.state.recipe.claps = claps
+        state.totalCount = claps
         state.hasClapped += 1
     },
     UPDATE_RECIPE_STATE(state, newState) {
@@ -19,7 +20,7 @@ const mutations = {
     },
 }
 const actions = {
-    async addClap(context, payload) {
+    async add_clap(context, payload) {
         try {
             const response = await makeRequest('add-clap', {
                 method: 'POST',
