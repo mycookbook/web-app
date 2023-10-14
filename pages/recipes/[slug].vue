@@ -59,64 +59,6 @@ export default defineNuxtComponent({
         }
     },
     methods: {
-        copyIngredients() {
-            const recipe = this.$store.state.recipe
-
-            const ingredients = recipe.ingredients.data
-            let ingredientsList = ''
-
-            const line1 = 'Ingredients list for ' + recipe.name + '\n\n'
-            const lastLine = '\n' + 'Have fun!' + '\n' + ':heart: Team CookbooksHQ'
-
-            for (let i = 0; i < ingredients.length; i++) {
-                ingredientsList +=
-                    '- ' + ingredients[i].unit + ' ' + ingredients[i].name + '\n'
-            }
-
-            const message = line1 + ingredientsList + lastLine
-
-            navigator.clipboard.writeText(message).then(function () {
-                $('#clipboardMsg').data('tooltip', 'Copied!')
-            })
-        },
-        textToSpeech() {
-            const config = useRuntimeConfig()
-            talkify.config.debug = false
-            talkify.config.useSsml = false
-
-            talkify.config.remoteService.apiKey = config.public.talkifyKey
-            talkify.config.ui.audioControls.enabled = true
-
-            const player = new talkify.TtsPlayer().enableTextHighlighting()
-
-            player.forceVoice({ name: 'Zira', description: 'Zira' })
-
-            const playlist = new talkify.playlist()
-                .begin()
-                .usingPlayer(player)
-                .withRootSelector('.talkify-section')
-                .withTextInteraction()
-                .build()
-
-            playlist.play()
-        },
-        ingredientLink(ingredient: { link: string; name: string; purchaseLink: string }) {
-            let url = ''
-            if (!ingredient.link) {
-                const googleSearchUrl =
-                    'https://www.google.com/search?q=2 lbs red potatoes' + ingredient.name
-
-                if (ingredient.purchaseLink) {
-                    url = ingredient.purchaseLink
-                } else {
-                    url = googleSearchUrl
-                }
-            } else {
-                url = ingredient.link
-            }
-
-            window.open(url, '_blank').focus()
-        },
         ingredientsList(recipe: { ingredients: string }) {
             try {
                 return JSON.parse(recipe.ingredients).data

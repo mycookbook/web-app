@@ -11,9 +11,13 @@
             <div class="ten wide tablet column ten wide computer column">
                 <div class="selectors">
                     <div class="ui secondary menu">
-                        <NuxtLink to="marketplace" class="item" title="Marketplace coming soon" id="marketplaceNavBtn">
-                            <i class="blue cart icon"></i> Go to Marketplace
-                        </NuxtLink>
+                        <div>
+                            <div class="ui disabled button tbb white-text">
+                                <NuxtLink :to="{ path: '/shopping-cart' }" title="Navigate to my dashboard">
+                                    <i class="ui white cart icon"></i>Cart (0)
+                                </NuxtLink>
+                            </div>
+                        </div>
                         <div v-if="isLoggedIn">
                             <div class="ui button tbb tablet hidden" @click="logOut()" id="logoutBtn">
                                 Logout
@@ -83,7 +87,8 @@ body {
     margin-left: 25px !important;
 }
 
-#dashboard-btn>a {
+#dashboard-btn>a,
+.white-text>a {
     color: white !important;
 }
 </style>
