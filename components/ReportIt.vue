@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="ui red fluid mini circular button"
+      class="ui red fluid button"
       :title="title"
       @click="ReportIt()"
     >

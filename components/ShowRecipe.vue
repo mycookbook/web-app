@@ -19,6 +19,9 @@
                         </div>
                         <img :src="recipe?.imgUrl" :alt="recipe?.name" class="zoom" />
                         <div class="talkify-section">
+                            <button class="ui facebook fluid disabled button">
+                                <i class="ui braille icon"></i>Click to Shop ingredients (Coming soon)
+                            </button>
                             <div class="ui header padded">
                                 <span> HOW TO PREPARE </span>
                                 <span style="float: right; cursor: pointer !important" @click="textToSpeech()">
@@ -39,9 +42,10 @@
                     <div class="eight wide computer column sixteen wide mobile column">
                         <div class="ui grid">
                             <div class="sixteen wide computer column sixteen wide mobile column">
-                                <Follow v-if="recipe?.author" :followers="recipe?.author?.followers"
-                                    :author="recipe?.author?.name" :avatar="recipe?.author?.avatar"
-                                    :handle="recipe?.author?.name_slug" />
+                                <NuxtLink :to="`/contributors/${recipe?.author?.name}`" class="ui image label">
+                                    <img :src="recipe?.author?.avatar">
+                                    {{ recipe?.author?.name }}
+                                </NuxtLink>
                             </div>
                         </div>
                         <div class="ui horizontal divider"></div>
@@ -49,21 +53,14 @@
                             <div class="four wide computer column sixteen wide mobile column">
                                 <Claps />
                             </div>
-                            <div class="four wide computer column sixteen wide mobile column">
-                                <div class="ui tbb fluid mini circular button" :class="{ disabled: !_isLoggedIn }"
-                                    title="Add a variation for this recipe, make it yours!">
-                                    <i class="ui plus icon"></i>
-                                    Customize
-                                </div>
-                            </div>
-                            <div class="four wide computer column sixteen wide mobile column">
-                                <div class="ui icon tbb fluid mini circular button" data-tooltip="Click to copy"
-                                    data-position="top left" data-inverted="" id="clipboardMsg" @click="copyIngredients()">
+                            <div class="six wide computer column sixteen wide mobile column">
+                                <div class="ui tbb fluid button" data-tooltip="Click to copy" data-position="top left"
+                                    data-inverted="" id="clipboardMsg" @click="copyIngredients()">
                                     <i class="ui linkify icon"></i>
                                     Copy ingredients
                                 </div>
                             </div>
-                            <div class="four wide computer column sixteen wide mobile column">
+                            <div class="six wide computer column sixteen wide mobile column">
                                 <ReportIt />
                             </div>
                         </div>
@@ -103,6 +100,47 @@ export default defineNuxtComponent({
                     target: '_blank'
                 }
             })
+        },
+        copyIngredients() {
+            const recipe = this.$store.state.recipe
+
+            const ingredients = recipe.ingredients.data
+            let ingredientsList = ''
+
+            const line1 = 'Ingredients list for ' + recipe.name + '\n\n'
+            const lastLine = '\n' + 'Have fun!' + '\n' + ':heart: Team CookbooksHQ'
+
+            for (let i = 0; i < ingredients.length; i++) {
+                ingredientsList +=
+                    '- ' + ingredients[i].unit + ' ' + ingredients[i].name + '\n'
+            }
+
+            const message = line1 + ingredientsList + lastLine
+
+            navigator.clipboard.writeText(message).then(function () {
+                $('#clipboardMsg').data('tooltip', 'Copied!')
+            })
+        },
+        textToSpeech() {
+            const config = useRuntimeConfig()
+            talkify.config.debug = false
+            talkify.config.useSsml = false
+
+            talkify.config.remoteService.apiKey = config.public.talkifyKey
+            talkify.config.ui.audioControls.enabled = true
+
+            const player = new talkify.TtsPlayer().enableTextHighlighting()
+
+            player.forceVoice({ name: 'Zira', description: 'Zira' })
+
+            const playlist = new talkify.playlist()
+                .begin()
+                .usingPlayer(player)
+                .withRootSelector('.talkify-section')
+                .withTextInteraction()
+                .build()
+
+            playlist.play()
         }
     }
 })
