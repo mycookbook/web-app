@@ -8,7 +8,7 @@
             </div>
             <div class="thirteen wide computer column sixteen wide mobile column sixteen wide tablet column">
                 <div
-                    v-if="searchq != '' && results.length == 0 && searchKeyType == 3 && !queryStartsWith(searchq) && !keepShowing()">
+                    v-if="searchq != '' && results.length == 0 && searchKeyType == 3 && !queryStartsWith(searchq) && !keepShowing() && !isLoggedIn">
                     <NoResultsModal :showing="showing" />
                     {{ unhideModal() }}
                 </div>
@@ -201,6 +201,9 @@ export default defineNuxtComponent({
 
                 return this.$route.query.q
             }
+        },
+        isLoggedIn() {
+            return this.$store.state.access_token
         }
     },
     data() {
