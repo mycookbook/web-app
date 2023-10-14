@@ -15,8 +15,12 @@ export default defineNuxtComponent({
     },
     computed: {
         totalCount() {
-            // we can format the below value
-            return this.$store.state.recipe?.claps || 0
+            const totalCount = this.$store.state.recipeStore.totalCount
+
+            if (totalCount > 0) {
+                return totalCount
+            }
+            return this.$store.state.recipe?.data.claps
         },
         hasReachedMaximumAllowedThreshold() {
             return (
@@ -27,9 +31,9 @@ export default defineNuxtComponent({
     },
     methods: {
         addClap() {
-            const id = this.$store.state.recipe.id
+            const id = this.$store.state.recipe?.data.id
             const payload = { recipeId: id }
-            this.$store.dispatch('addClap', payload)
+            this.$store.dispatch('add_clap', payload)
         },
     },
 })
