@@ -20,9 +20,11 @@ export default defineNuxtConfig({
         region: process.env.AWS_REGION,
       },
       devUser: process.env.DEV_USER,
-      devToken: process.env.DEV_TOKEN,
+      devEmail: process.env.DEV_EMAIL,
+      devPass: process.env.DEV_PASS,
       ipInfoUri: 'https://ipinfo.io',
       ipInfoToken: process.env.IPINFO_TOKEN,
+      tokenValidateEndpoint: 'https://api.cookbookshq.com/api/v1/auth/validate',
       talkifyKey: process.env.TALKIFY_KEY,
       tiktokClientKey: process.env.TIKTOK_CLIENT_KEY,
       serverOauthEndpoint: process.env.SERVER_ENDPOINT_OAUTH,
@@ -73,9 +75,5 @@ export default defineNuxtConfig({
       ],
     },
   },
-  css: ['@/assets/css/style.css'],
-  dir: {
-    modules: ["vue2-editor/nuxt"]
-  }
-//   modules: ["vue2-editor/nuxt"]
+  css: ['@/assets/css/style.css']
 })

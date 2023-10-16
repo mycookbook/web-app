@@ -4,9 +4,9 @@
         <div class="ui grid">
             <div class="sixteen wide computer column sixteen wide mobile column">
                 <div class="ui grid" style="
-              border: 1px solid rgb(255, 255, 255);
+              border: 1px solid rgb(255 255 255);
               border-radius: 15px !important;
-              background-color: rgb(255, 255, 255);
+              background-color: rgb(255 255 255);
             ">
                     <div class="eight wide computer column sixteen wide mobile column ui fluid image"
                         style="height: fit-content !important">
@@ -151,7 +151,6 @@ export default defineNuxtComponent({
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
 }
 
 .padded {
@@ -167,7 +166,7 @@ export default defineNuxtComponent({
     display: block !important;
 }
 
-.shareIcons span {
+.share-icons span {
     margin-right: 12% !important;
     cursor: pointer !important;
 }

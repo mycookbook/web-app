@@ -55,7 +55,7 @@
 									<p>
 										Enable/Disable Dark Mode
 									</p>
-									<DarkModeSwitch @switched="onSwitched" :initialState="isDarkModeEnabled" />
+									<!-- <DarkModeSwitch @switched="onSwitched" :initialState="isDarkModeEnabled" /> -->
 								</div>
 								<div v-if="activeLink === 'Notifications'">
 									My notifications

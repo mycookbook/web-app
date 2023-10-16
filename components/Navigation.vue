@@ -22,20 +22,20 @@
                     <div class="ui secondary menu">
                         <div>
                             <div class="ui button tbb white-text">
-                                <NuxtLink :to="{ path: '/stores-locator' }" title="Navigate to my dashboard">
+                                <NuxtLink :to="{ path: '/stores-locator' }">
                                     <i class="ui point icon"></i>Stores Locator
                                 </NuxtLink>
                             </div>
                         </div>
                         <div v-if="isLoggedIn">
-                            <div class="ui tbb button" @click="logOut()">
-                                Logout
-                            </div>
                             <div class="ui button tbb tablet hidden" id="dashboard-btn">
                                 <NuxtLink :to="{ path: '/dashboard', query: { tab: 'Recipes' } }"
                                     title="Navigate to my dashboard">
                                     My Dashboard
                                 </NuxtLink>
+                            </div>
+                            <div class="ui  button" @click="logOut()">
+                                Logout
                             </div>
                         </div>
                         <div v-else>
@@ -58,7 +58,11 @@
 export default {
     computed: {
         isLoggedIn() {
-            return (this.$store.state.access_token);
+            if (Object.is(this.$store.state.access_token, null)) {
+                return false
+            }
+
+            return true
         },
         routeName() {
             return this.$route.name
@@ -110,8 +114,7 @@ body {
     margin-left: 25px !important;
 }
 
-#dashboard-btn>a,
-.white-text>a {
+.white-text>a, #dashboard-btn>a{
     color: white !important;
 }
 </style>

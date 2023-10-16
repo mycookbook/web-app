@@ -1,20 +1,11 @@
 import { store } from '~~/store'
-import { makeTokenValidationRequest } from '~~/utils/makeRequest'
 
-export default defineNuxtRouteMiddleware(async (to) => {
-  const accessToken = store.state.access_token
-  //   return abortNavigation()
-  if (!accessToken) {
-    return navigateTo('/register')
-  }
-  try {
-    const result = await makeTokenValidationRequest(accessToken)
-    if (result.data.validated === true) {
-      return navigateTo(to)
+export default defineNuxtRouteMiddleware(async (to, from) => {
+    if (to.query._d && to.query.code) {
+        const code = to.query.code
+        const _d = to.query._d
+
+        store.dispatch('set_active_user', {code, _d })
     }
-  } catch (error) {
-    store.dispatch('logout')
-    return navigateTo('/register')
-  }
-  return navigateTo('/')
+    //TODO: remeber where user left off before signing in and redirect them back there as much as possible
 })
