@@ -40,6 +40,11 @@ export const store = createStore({
             access_token: null,
             contributor: {},
             username: null,
+            smart_redirects: {},
+            following_data: {},
+            upload_error: null,
+            imagePath: ""
+
         }
     },
     actions: {
@@ -82,7 +87,7 @@ export const store = createStore({
             context.commit('SET_LOADING_STATE', true)
         },
         async set_active_user(context, payload) {
-            const userDetails = await Promise.resolve(makeRequest('users/test-user'))
+            const userDetails = await Promise.resolve(makeRequest('users/' + payload._d))
 
             if (userDetails.data) {
                 context.commit('SET_ACTIVE_USER', {
@@ -150,14 +155,24 @@ export const store = createStore({
             localStorage.setItem('_t', accessToken)
         },
         LOGOUT(state) {
+            state.active_user = {}
+            state.resource_isLoading = false
+            state.policies.cookiePolicy = ''
+            state.policies.usagePolicy = ''
+            state.policies.dataRetentionPolicy = ''
+            state.policies.termsAndConditons = ''
+            state.form_errors.registration_form = {}
+            state.form_errors.contact_form = {}
             state.access_token = null;
-            state.active_user = {};
+            state.contributor = {}
+            state.username = null
             state.following_data = {};
+            state.smart_redirects = {}
         },
         UPDATE_CONTRIBUTOR_OBJECT(state, newState) {
             state.contributor = newState.data.user[0]
         },
-        RESET_MSGS(state: { upload_error: null; imagePath: string; }) {
+        RESET_MSGS(state) {
             state.upload_error = null
             state.imagePath = ''
         },

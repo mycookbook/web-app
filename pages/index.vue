@@ -29,12 +29,18 @@
 
 <script lang="ts">
 definePageMeta({
-  middleware: ["auth"]
+    middleware: ["auth"]
 })
 
 export default defineNuxtComponent({
     mounted() {
         this.$store.dispatch('boot')
+    },
+    created() {
+        const shouldRedirect = this.$store.state.smart_redirects.hasOwnProperty("shouldRedirect")
+        if (shouldRedirect) {
+            navigateTo(this.$store.state.smart_redirects.from.href)
+        }
     },
     computed: {
         userIsLoggedIn() {
