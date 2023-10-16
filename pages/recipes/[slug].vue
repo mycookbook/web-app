@@ -18,6 +18,10 @@
 </template>
 
 <script lang="ts">
+definePageMeta({
+    middleware: ["auth"]
+})
+
 export default defineNuxtComponent({
     mounted() {
         this.$store.dispatch('fetch_recipe', this.$route.params.slug)
