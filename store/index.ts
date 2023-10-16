@@ -144,7 +144,7 @@ export const store = createStore({
             state.policies.termsAndConditons = policies.termsAndConditions.content
         },
         SET_LOADING_STATE(state, status) {
-            this.state.resource_isLoading = status
+            state.resource_isLoading = status
         },
         SET_ACTIVE_USER(state, { accessToken, userName, activeUser }) {
             state.access_token = accessToken
