@@ -1,18 +1,31 @@
-<template><div></div></template>
+<template>
+    <div></div>
+</template>
+
 <script setup lang="ts">
 definePageMeta({
-  middleware() {
-    const config = useRuntimeConfig()
-    const route = useRoute()
-    const router = useRouter()
+    async middleware() {
+        const config = useRuntimeConfig()
+        const route = useRoute()
+        const router = useRouter()
 
-    let code = route.query.token
-    let username = route.query._d
+        let code = route.query.token
+        let username = route.query._d
 
-    if (!username) username = config.public.devUser
-    if (!code) code = config.public.devToken
+        if (!username && !code) {
+            const response = await Promise.resolve(makeRequest('auth/login', {
+                method: 'POST',
+                data: {
+                    email: config.public.devEmail,
+                    password: config.public.devPass
+                }
+            }))
+            
+            username = config.public.devUser
+            code = response.data.token
+        }
 
-    return router.replace({ name: 'index', query: {'code': code, '_d': username}})
-  },
+        return router.replace({ name: 'index', query: { 'code': code, '_d': username } })
+    },
 })
 </script>

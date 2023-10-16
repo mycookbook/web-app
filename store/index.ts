@@ -142,12 +142,12 @@ export const store = createStore({
             this.state.resource_isLoading = status
         },
         SET_ACTIVE_USER(state, { accessToken, userName, activeUser }) {
-            console.log('username', activeUser)
             state.access_token = accessToken
             state.username = userName
             state.active_user = {
                 recipes: []
             }
+            localStorage.setItem('_t', accessToken)
         },
         LOGOUT(state) {
             state.access_token = null;

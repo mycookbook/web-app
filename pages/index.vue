@@ -28,19 +28,13 @@
 </template>
 
 <script lang="ts">
+definePageMeta({
+  middleware: ["auth"]
+})
+
 export default defineNuxtComponent({
     mounted() {
         this.$store.dispatch('boot')
-
-        if (this.$route.query._d && this.$route.query.code) {
-            const code = this.$route.query.code
-            const _d = this.$route.query._d
-
-            this.$store.dispatch('set_active_user', {code, _d })
-
-            const router = useRouter()
-            this.$router.replace({ path: '/' })
-        }
     },
     computed: {
         userIsLoggedIn() {

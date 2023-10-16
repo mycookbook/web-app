@@ -35,7 +35,7 @@
                             </div>
                             <br /><br /><br />
                             <div>
-                                <h6 style="font-weight: lighter;!important">
+                                <h6>
                                     <div>
                                         Looking for search tips? We gatchu. Check out our <a
                                             href="/help/query-syntax">search query syntax</a>. The
