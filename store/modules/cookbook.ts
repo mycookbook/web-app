@@ -68,10 +68,10 @@ const actions = {
         context.commit('SET_LOADING_STATE', true)
         try {
             const response = await makeRequest(`cookbooks/${cookbookId}`)
-            context.commit('UPDATE_COOKBOOK_STATE', response.data)
-            context.commit('SET_LOADING_STATE', false)
+            // context.commit('UPDATE_COOKBOOK_STATE', response.data)
+            // context.commit('SET_LOADING_STATE', false)
         } catch (error) {
-            context.commit('SET_LOADING_STATE', false)
+            // context.commit('SET_LOADING_STATE', false)
         }
     },
     async create_cookbook(context, payload) {
