@@ -55,7 +55,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.1292.0",
-    "axios": "^1.2.2",
+    "axios": "^1.6.0",
     "jquery": "^3.6.3",
     "semantic-ui-css": "^2.5.0",
     "vee-validate": "^4.11.8",
